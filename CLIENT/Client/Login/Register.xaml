@@ -1,0 +1,200 @@
+﻿<Page x:Class="Client.Register"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      FontFamily="Sitka Subheading">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!--Backward & Forward-->
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Command="{x:Static NavigationCommands.BrowseBack}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowLeft"
+                Height="20"
+                Width="20" />
+        </Button>
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Margin="28,0,0,0"
+            Command="{x:Static NavigationCommands.BrowseForward}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowRight"
+                Height="20"
+                Width="20" />
+        </Button>
+        
+        <!--Title-->
+        <Label Content="ĐĂNG KÝ TÀI KHOẢN"
+               Grid.ColumnSpan="2"
+               FontSize="22"
+               Padding="0"
+               FontWeight="Bold"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Center"/>
+
+        <!--Username-->
+        <Label Grid.Row="1"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="25,0,0,0"
+               Target="{Binding ElementName=editUsername}">- _TÀI KHOẢN</Label>
+        <TextBox Grid.Row="1"
+                 Name="editUsername"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Password-->
+        <Label Grid.Row="2"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="25,0,0,0"
+               Target="{Binding ElementName=editPassword}">- _MẬT KHẨU</Label>
+        <PasswordBox Grid.Row="2"
+                 Name="editPassword"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+        <Label Grid.Row="3"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="25,0,0,0"
+               Content="- XÁC NHẬN"/>
+        <PasswordBox Grid.Row="3"
+                 Name="editPassword2"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Email-->
+        <Label Grid.Row="4"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="25,0,0,0"
+               Target="{Binding ElementName=editEmail}">- _EMAIL</Label>
+        <TextBox Grid.Row="4"
+                 Name="editEmail"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Name-->
+        <Label Grid.Row="5"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="25,0,0,0"
+               Target="{Binding ElementName=editFirstname}">- _HỌ</Label>
+        <TextBox Grid.Row="5"
+                 Name="editFirstname"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+        <Label Grid.Row="6"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="25,0,0,0"
+               Target="{Binding ElementName=editLastname}">- _TÊN</Label>
+        <TextBox Grid.Row="6"
+                 Name="editLastname"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Faculty-->
+        <Label Grid.Row="7"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="25,0,0,0"
+               Content="- KHOA"/>
+        <ComboBox Grid.Row="7"
+                  Name="editFaculty"
+                  Tag="None"
+                  VerticalAlignment="Bottom"
+                  FontSize="17"
+                  Margin="165,0,30,5"
+                  DropDownOpened="Combobox_DropDownOpened"
+                  DropDownClosed="Combobox_DropDownClosed"
+                  SelectionChanged="EditFaculty_SelectionChanged"
+                  FontWeight="Bold"
+                  materialDesign:HintAssist.Hint="Chọn khoa"
+                  ItemsSource="{Binding LongListToTestComboVirtualization}">
+        </ComboBox>
+
+        <!--Avatar-->
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Grid.RowSpan="5"
+                Margin="30,30,30,30">
+            <Border.Effect>
+                <DropShadowEffect
+                    Direction="270"
+                    ShadowDepth="5"
+                    BlurRadius="20"/>
+            </Border.Effect>
+            <Image Source="Images/Avatar.png"/>
+        </Border>
+
+        <!--Button-->
+        <Button Grid.Row="6"
+                Grid.Column="1"
+                Name="btnAvatar"
+                FontSize="18"
+                Width="150"
+                Height="35"
+                IsEnabled="False"
+                VerticalAlignment="Bottom"
+                Content="Chọn ảnh"/>
+        <Button Grid.Row="7"
+                Grid.Column="1"
+                Name="btnRegister"
+                FontSize="18"
+                Width="150"
+                Height="35"
+                Content="Đăng ký"
+                Click="BtnRegister_Click"/>
+    </Grid>
+</Page>

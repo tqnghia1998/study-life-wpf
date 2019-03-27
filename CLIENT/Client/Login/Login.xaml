@@ -1,0 +1,136 @@
+﻿<Page x:Class="Client.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        FontFamily="Sitka Subheading">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="1.2*"></RowDefinition>
+            <RowDefinition Height="1.2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <!--Backward & Forward-->
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Command="{x:Static NavigationCommands.BrowseBack}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowLeft"
+                Height="20"
+                Width="20" />
+        </Button>
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Margin="28,0,0,0"
+            Command="{x:Static NavigationCommands.BrowseForward}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowRight"
+                Height="20"
+                Width="20" />
+        </Button>
+
+        <!--Logo-->
+        <Border Padding="0,30,0,30">
+            <Border.Effect>
+                <DropShadowEffect
+                    Direction="270"
+                    ShadowDepth="5"
+                    BlurRadius="20"/>
+            </Border.Effect>
+            <Image Source="Images/Logo.png"/>
+        </Border>
+
+        <!--Username-->
+        <Image Grid.Row="1"
+               Source="./Images/User.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Width="30"
+               Height="30"
+               Margin="210,20,0,0"/>
+        <Label Grid.Row="1"
+               FontSize="18"
+               FontWeight="Bold"
+               Margin="245,0,0,0"
+               Target="{Binding ElementName=editUsername}">_TÀI KHOẢN</Label>
+        <TextBox Grid.Row="1"
+                 Name="editUsername"
+                 Height="35"
+                 FontSize="16"
+                 Background="Transparent"
+                 Margin="250,15,250,0"
+                 BorderThickness="0,0,0,0.25"
+                 KeyDown="TextBox_KeyDown"/>
+
+        <!--Password-->
+        <Image Grid.Row="2"
+               Source="./Images/Pass.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Width="30"
+               Height="30"
+               Margin="210,20,0,0"/>
+        <Label Grid.Row="2"
+               FontSize="18"
+               FontWeight="Bold"
+               Margin="245,0,0,0"
+               Target="{Binding ElementName=editPassword}">_MẬT KHẨU</Label>
+        <PasswordBox Grid.Row="2"
+                     Name="editPassword"
+                     Height="35"
+                     FontSize="14"
+                     Background="Transparent"
+                     Margin="250,15,250,0"
+                     BorderThickness="0,0,0,0.25"
+                     KeyDown="TextBox_KeyDown"/>
+
+        <!--Quên mật khẩu-->
+        <TextBlock Grid.Row="2"
+                   HorizontalAlignment="Right"
+                   FontSize="13"
+                   Margin="0,5,250,0">
+            <Hyperlink Foreground="Black">Quên mật khẩu?</Hyperlink>
+        </TextBlock>
+
+        <!--Button-->
+        <Button Grid.Row="3"
+                Name="btnSignIn"
+                FontSize="18"
+                Width="120"
+                Height="35"
+                Content="Đăng nhập"
+                Margin="0,15,0,0"
+                VerticalAlignment="Top"
+                Click="BtnSignIn_Click"/>
+
+        <!--Lựa chọn đăng ký-->
+        <TextBlock Grid.Row="3"
+                   FontSize="12"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,60,0,0">
+            CHƯA CÓ TÀI KHOẢN?
+            <Hyperlink Foreground="Black"
+                       FontWeight="Bold"
+                       Click="Hyperlink_Click">
+               ĐĂNG KÝ
+            </Hyperlink>
+        </TextBlock>
+    </Grid>
+</Page>
