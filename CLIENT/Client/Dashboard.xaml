@@ -1,0 +1,122 @@
+﻿<Page x:Class="Client.Dashboard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"
+      Title="Dashboard">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Backward & Forward-->
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Command="{x:Static NavigationCommands.BrowseBack}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowLeft"
+                Height="20"
+                Width="20" />
+        </Button>
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Margin="28,0,0,0"
+            Command="{x:Static NavigationCommands.BrowseForward}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowRight"
+                Height="20"
+                Width="20" />
+        </Button>
+
+        <!--Quản lý khoa-->
+        <Border Name="manageFaculty" Margin="50,0,0,0">
+            <Border.Effect>
+                <DropShadowEffect
+                    Color="DarkGray"
+                    Direction="270"
+                    ShadowDepth="5"
+                    BlurRadius="20"/>
+            </Border.Effect>
+            <Image Grid.Row="0"
+               Tag="imgManageFaculty"
+               Source="Images/ManageFaculty.png"
+               MouseUp="Image_MouseUp"
+               MouseMove="img_MouseMove"
+               MouseLeave="img_MouseLeave">
+            </Image>
+        </Border>
+
+        <!--Quản lý môn học-->
+        <Border Name="manageSubject" Grid.Column="1" Margin="0,0,50,0">
+            <Border.Effect>
+                <DropShadowEffect
+                    Color="DarkGray"
+                    Direction="270"
+                    ShadowDepth="5"
+                    BlurRadius="20"/>
+            </Border.Effect>
+            <Image Grid.Row="0"
+               Tag="imgManageSubject"
+               Source="Images/ManageSubject.png"
+               MouseUp="Image_MouseUp"
+               MouseMove="img_MouseMove"
+               MouseLeave="img_MouseLeave">
+            </Image>
+        </Border>
+
+        <!--Quản lý học kỳ-->
+        <Border Name="manageTerm" Grid.Row="1" Margin="50,0,0,0">
+            <Border.Effect>
+                <DropShadowEffect
+                    Color="DarkGray"
+                    Direction="270"
+                    ShadowDepth="5"
+                    BlurRadius="20"/>
+            </Border.Effect>
+            <Image Grid.Row="0"
+               Tag="imgManageTerm"
+               Source="Images/ManageTerm.png"
+               MouseUp="Image_MouseUp"
+               MouseMove="img_MouseMove"
+               MouseLeave="img_MouseLeave">
+            </Image>
+        </Border>
+
+        <!--Thống kê-->
+        <Border Name="manageStatistic" Grid.Row="1" Grid.Column="1" Margin="0,0,50,0">
+            <Border.Effect>
+                <DropShadowEffect
+                    Color="DarkGray"
+                    Direction="270"
+                    ShadowDepth="5"
+                    BlurRadius="20"/>
+            </Border.Effect>
+            <Image Grid.Row="0"
+               Tag="imgManageStatistic"
+               Source="Images/Statistic.png"
+               MouseUp="Image_MouseUp"
+               MouseMove="img_MouseMove"
+               MouseLeave="img_MouseLeave">
+            </Image>
+        </Border>
+    </Grid>
+</Page>

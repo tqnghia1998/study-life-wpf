@@ -13,7 +13,7 @@
         Title="Thông báo">
     
     <Window.Background>
-        <ImageBrush ImageSource="../Login/Images/Background.png"/>
+        <ImageBrush ImageSource="../Images/Background.png"/>
     </Window.Background>
 
     <Grid>

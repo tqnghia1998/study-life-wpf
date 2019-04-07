@@ -44,8 +44,8 @@
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Maps.MapControl.WPF.1.0.0.3\lib\net40-Client\Microsoft.Maps.MapControl.WPF.dll</HintPath>
@@ -87,6 +87,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFTextBoxAutoComplete, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFTextBoxAutoComplete.1.0.5\lib\net40\WPFTextBoxAutoComplete.dll</HintPath>
+    </Reference>
     <Reference Include="xNet">
       <HintPath>.\xNet.dll</HintPath>
     </Reference>
@@ -99,6 +102,14 @@
     <Page Include="Custom\Dialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Faculty\PageFaculty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Login\Login.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +130,12 @@
     <Compile Include="Classes\CFaculty.cs" />
     <Compile Include="Custom\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Faculty\PageFaculty.xaml.cs">
+      <DependentUpon>PageFaculty.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -159,15 +176,39 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Login\Images\Background.png" />
-    <Resource Include="Login\Images\Pass.png" />
-    <Resource Include="Login\Images\User.png" />
+    <Resource Include="Images\Background.png" />
+    <Resource Include="Images\Pass.png" />
+    <Resource Include="Images\User.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Login\Images\Avatar.png" />
+    <Resource Include="Images\Avatar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Login\Images\Logo.png" />
+    <Resource Include="Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Firstname.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Faculty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ManageFaculty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ManageSubject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ManageTerm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Statistic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

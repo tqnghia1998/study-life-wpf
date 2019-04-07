@@ -25,7 +25,9 @@ module.exports = {
         let productId = req.params.productId;
         let sqlCom = "UPDATE PRODUCTS SET ? WHERE ID = ?";
         db.query(sqlCom, [data, productId], function(err, response){
-            if (err) throw err;
+            if (err) res.json({
+                message: data
+            });
             res.json({
                 message: "Update success!"
             });
@@ -35,9 +37,8 @@ module.exports = {
         let data = req.body;
         let sqlCom = "INSERT INTO PRODUCTS SET ?";
         db.query(sqlCom, [data], function(err, response){
-            if (err) throw err;
             res.json({
-                message: "Insert success!"
+                message: err ? "Mã sản phẩm đã tồn tại!": "Insert success!"
             });
         });
     },

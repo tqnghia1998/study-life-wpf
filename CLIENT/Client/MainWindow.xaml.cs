@@ -24,7 +24,7 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
-            _mainFrame.Navigate(new Login());
+            _mainFrame.Navigate(new Dashboard());
             domainURL = "http://localhost:6969";
         }
 

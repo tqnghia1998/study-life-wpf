@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       FontFamily="Sitka Subheading">
 
     <Grid>
@@ -24,7 +24,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
         <!--Backward & Forward-->
         <Button
             HorizontalAlignment="Left"
@@ -53,7 +53,7 @@
                 Height="20"
                 Width="20" />
         </Button>
-        
+
         <!--Title-->
         <Label Content="ĐĂNG KÝ TÀI KHOẢN"
                Grid.ColumnSpan="2"
@@ -64,12 +64,19 @@
                HorizontalAlignment="Center"/>
 
         <!--Username-->
+        <Image Grid.Row="1"
+               Source="../Images/User.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
         <Label Grid.Row="1"
                FontSize="18"
                FontWeight="Bold"
                VerticalAlignment="Bottom"
-               Margin="25,0,0,0"
-               Target="{Binding ElementName=editUsername}">- _TÀI KHOẢN</Label>
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editUsername}">_TÀI KHOẢN</Label>
         <TextBox Grid.Row="1"
                  Name="editUsername"
                  FontSize="17"
@@ -78,12 +85,19 @@
                  BorderThickness="0,0,0,0.25"/>
 
         <!--Password-->
+        <Image Grid.Row="2"
+               Source="../Images/Pass.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
         <Label Grid.Row="2"
                FontSize="18"
                FontWeight="Bold"
                VerticalAlignment="Bottom"
-               Margin="25,0,0,0"
-               Target="{Binding ElementName=editPassword}">- _MẬT KHẨU</Label>
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editPassword}">_MẬT KHẨU</Label>
         <PasswordBox Grid.Row="2"
                  Name="editPassword"
                  FontSize="17"
@@ -94,8 +108,8 @@
                FontSize="18"
                FontWeight="Bold"
                VerticalAlignment="Bottom"
-               Margin="25,0,0,0"
-               Content="- XÁC NHẬN"/>
+               Margin="50,0,0,0"
+               Content="XÁC NHẬN"/>
         <PasswordBox Grid.Row="3"
                  Name="editPassword2"
                  FontSize="17"
@@ -104,12 +118,19 @@
                  BorderThickness="0,0,0,0.25"/>
 
         <!--Email-->
+        <Image Grid.Row="4"
+               Source="../Images/Email.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
         <Label Grid.Row="4"
                FontSize="18"
                FontWeight="Bold"
                VerticalAlignment="Bottom"
-               Margin="25,0,0,0"
-               Target="{Binding ElementName=editEmail}">- _EMAIL</Label>
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editEmail}">_EMAIL</Label>
         <TextBox Grid.Row="4"
                  Name="editEmail"
                  FontSize="17"
@@ -118,12 +139,19 @@
                  BorderThickness="0,0,0,0.25"/>
 
         <!--Name-->
+        <Image Grid.Row="5"
+               Source="../Images/Firstname.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
         <Label Grid.Row="5"
                FontSize="18"
                FontWeight="Bold"
                VerticalAlignment="Bottom"
-               Margin="25,0,0,0"
-               Target="{Binding ElementName=editFirstname}">- _HỌ</Label>
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editFirstname}">_HỌ</Label>
         <TextBox Grid.Row="5"
                  Name="editFirstname"
                  FontSize="17"
@@ -134,8 +162,8 @@
                FontSize="18"
                FontWeight="Bold"
                VerticalAlignment="Bottom"
-               Margin="25,0,0,0"
-               Target="{Binding ElementName=editLastname}">- _TÊN</Label>
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editLastname}">_TÊN</Label>
         <TextBox Grid.Row="6"
                  Name="editLastname"
                  FontSize="17"
@@ -144,12 +172,19 @@
                  BorderThickness="0,0,0,0.25"/>
 
         <!--Faculty-->
+        <Image Grid.Row="7"
+               Source="../Images/Faculty.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
         <Label Grid.Row="7"
                FontSize="18"
                FontWeight="Bold"
                VerticalAlignment="Bottom"
-               Margin="25,0,0,0"
-               Content="- KHOA"/>
+               Margin="50,0,0,0"
+               Content="KHOA"/>
         <ComboBox Grid.Row="7"
                   Name="editFaculty"
                   Tag="None"
@@ -175,7 +210,7 @@
                     ShadowDepth="5"
                     BlurRadius="20"/>
             </Border.Effect>
-            <Image Source="Images/Avatar.png"/>
+            <Image Source="../Images/Avatar.png"/>
         </Border>
 
         <!--Button-->

@@ -18,7 +18,10 @@ module.exports = function(app) {
 
     /* FACULTIES CONTROLLER */
     app.route("/faculties")
-    .get(facultiesCtrl.get);
+    .get(facultiesCtrl.get)
+    .post(facultiesCtrl.post);
+    app.route("/faculties/:facultyid")
+    .put(facultiesCtrl.update);
 
     /* PRODUCTS CONTROLLER */
     app.route("/products")

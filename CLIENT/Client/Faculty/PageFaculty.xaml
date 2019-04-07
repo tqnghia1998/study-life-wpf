@@ -1,0 +1,377 @@
+﻿<Page x:Class="Client.Faculty.PageFaculty"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+      xmlns:local="clr-namespace:Client.Faculty"
+      mc:Ignorable="d"
+      SizeChanged="Page_SizeChanged"
+      FontFamily="Sitka Subheading"
+      Title="Faculty">
+
+    <!--Reference của hàm chuyển đổi STT cho List View-->
+    <Page.Resources>
+        <local:DataConverter x:Key="IndexConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Backward & Forward-->
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Command="{x:Static NavigationCommands.BrowseBack}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowLeft"
+                Height="20"
+                Width="20" />
+        </Button>
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Margin="28,0,0,0"
+            Command="{x:Static NavigationCommands.BrowseForward}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowRight"
+                Height="20"
+                Width="20" />
+        </Button>
+
+        <!--Title-->
+        <Label Content="DANH SÁCH KHOA"
+               Grid.ColumnSpan="2"
+               FontFamily="Sitka Subheading"
+               FontSize="22"
+               Padding="0"
+               FontWeight="Bold"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Center"/>
+
+        <!--Faculty list-->
+        <ListView Name="listFaculty"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  FontFamily="Sitka Subheading"
+                  FontSize="15"
+                  Margin="8,0,0,0"
+                  Foreground="Black"
+                  SelectionChanged="ListFaculty_SelectionChanged"
+                  HorizontalAlignment="Left">
+            <ListView.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                </Style>
+            </ListView.Resources>
+
+            <!--Design columns-->
+            <ListView.View>
+                <GridView>
+                    <!--Index-->
+                    <GridViewColumn
+                        Width="65"
+                        DisplayMemberBinding="{
+                        Binding RelativeSource={RelativeSource FindAncestor,
+                        AncestorType={x:Type ListViewItem}}, 
+                        Converter={StaticResource IndexConverter}}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="STT"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <!--Faculty name-->
+                    <GridViewColumn x:Name="nameFaculty"
+                        Width="285"
+                        DisplayMemberBinding="{Binding facultyname}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="Tên khoa"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <!--Faculty id-->
+                    <GridViewColumn
+                        Width="120"
+                        DisplayMemberBinding="{Binding facultyid}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="Mã khoa"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <!--Faculty room-->
+                    <GridViewColumn
+                        Width="120"
+                        DisplayMemberBinding="{Binding facultyroom}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="Phòng ban"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <!--Faculty email-->
+                    <GridViewColumn
+                        Width="250"
+                        DisplayMemberBinding="{Binding facultyemail}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="Email liên hệ"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <!--Faculty phone-->
+                    <GridViewColumn
+                        Width="130"
+                        DisplayMemberBinding="{Binding facultyphone}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="Số điện thoại"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+
+        <!--Faculty Id-->
+        <TextBox Grid.Row="2"
+                 Margin="15,10,15,20"
+                 materialDesign:HintAssist.Hint="Mã khoa"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="False"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editFacultyId"/>
+
+        <!--Faculty name-->
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 Margin="15,10,15,0"
+                 materialDesign:HintAssist.Hint="Tên khoa"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="False"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editFacultyName"/>
+
+        <!--Faculty room-->
+        <TextBox Grid.Row="2"
+                 Margin="15,60,15,20"
+                 materialDesign:HintAssist.Hint="Phòng ban"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="False"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editFacultyRoom"/>
+
+        <!--Faculty email-->
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 Margin="15,60,15,0"
+                 materialDesign:HintAssist.Hint="Email liên hệ"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="False"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editFacultyEmail"/>
+
+        <!--Faculty phone-->
+        <TextBox Grid.Row="2"
+                 Margin="15,110,15,20"
+                 materialDesign:HintAssist.Hint="Số điện thoại"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="False"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editFacultyPhone"/>
+
+        <!--Button add-->
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                Width="130"
+                Content="Thêm"
+                FontWeight="Bold"
+                Foreground="White"
+                FontSize="15"
+                Margin="15,110,0,20"
+                HorizontalAlignment="Left"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Name="btnAddFaculty"
+                Click="BtnAddFaculty_Click">
+        </Button>
+
+        <!--Button edit-->
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                Width="130"
+                Content="Sửa"
+                FontWeight="Bold"
+                Foreground="White"
+                FontSize="15"
+                Margin="0,110,0,20"
+                IsEnabled="False"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Name="btnUpdateFaculty"
+                Click="BtnUpdateFaculty_Click">
+        </Button>
+
+        <!--Button see subjects-->
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                Width="130"
+                Content="Xem môn học"
+                FontWeight="Bold"
+                Foreground="White"
+                FontSize="15"
+                Margin="0,110,15,20"
+                HorizontalAlignment="Right"
+                IsEnabled="False"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Name="btnSeeSubjects"
+                Click="BtnSeeSubjects_Click">
+        </Button>
+        
+        <!--Search bar-->
+        <TextBox Name="searchBar"
+                 KeyDown="SearchBar_KeyDown"
+                 Grid.Column="1"
+		         Width="250"
+                 Height="35"
+                 FontSize="15"
+                 Padding="0,0,16,0"
+                 VerticalAlignment="Top"
+		         HorizontalAlignment="Right"
+                 materialDesign:HintAssist.Hint="Tìm kiếm"
+		         behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding listFacultyName}" 
+		         behaviors:AutoCompleteBehavior.AutoCompleteStringComparison="InvariantCultureIgnoreCase">
+            <TextBox.Background>
+                <ImageBrush ImageSource="../Images/Search.png"
+                            AlignmentX="Right"
+                            Stretch="None"/>
+            </TextBox.Background>
+        </TextBox>
+
+        <!--Progressbar loading-->
+        <ProgressBar Grid.Row="1" Grid.ColumnSpan="2"
+                     Width="25" Height="25"
+                     Style="{StaticResource MaterialDesignCircularProgressBar}"
+                     x:Name="ProgressBar">
+            <ProgressBar.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Value" From="0" To="100" Duration="0:0:1" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </ProgressBar.Triggers>
+        </ProgressBar>
+    </Grid>
+</Page>

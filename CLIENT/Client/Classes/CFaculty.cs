@@ -11,6 +11,7 @@ namespace Client.Classes
         public string facultyid { get; set; }
         public string facultyname { get; set; }
         public string facultyroom { get; set; }
+        public string facultyemail { get; set; }
         public string facultyphone { get; set; }
     }
 }

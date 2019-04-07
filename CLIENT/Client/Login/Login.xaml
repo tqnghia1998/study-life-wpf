@@ -53,12 +53,12 @@
                     ShadowDepth="5"
                     BlurRadius="20"/>
             </Border.Effect>
-            <Image Source="Images/Logo.png"/>
+            <Image Source="../Images/Logo.png"/>
         </Border>
 
         <!--Username-->
         <Image Grid.Row="1"
-               Source="./Images/User.png"
+               Source="../Images/User.png"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Width="30"
@@ -80,7 +80,7 @@
 
         <!--Password-->
         <Image Grid.Row="2"
-               Source="./Images/Pass.png"
+               Source="../Images/Pass.png"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Width="30"

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Tonys\Documents\Visual Studio 2017\Projects\Client\Client\obj\Debug\
+E:\Git\PTTKPM\CLIENT\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-C:\Users\Tonys\Documents\Visual Studio 2017\Projects\Client\Client\App.xaml
-41806793841
+E:\Git\PTTKPM\CLIENT\Client\App.xaml
+6-654727936
 
-13-6842489
-135-1360636494
-Custom\Dialog.xaml;Login\Login.xaml;Login\Register.xaml;MainWindow.xaml;
+151952091239
+1361588771717
+Custom\Dialog.xaml;Dashboard.xaml;Faculty\PageFaculty.xaml;Login\Login.xaml;Login\Register.xaml;MainWindow.xaml;
 
 True
 
