@@ -3,6 +3,7 @@ module.exports = function(app) {
     const loginCtrl = require("./controllers/LoginController");
     const facultiesCtrl = require("./controllers/FacultiesController");
     const productsCtrl = require("./controllers/ProductsController");
+    const termsCtrl = require("./controllers/TermsController");
 
     /* LOGIN CONTROLLER */
     app.route("/login")
@@ -22,6 +23,13 @@ module.exports = function(app) {
     .post(facultiesCtrl.post);
     app.route("/faculties/:facultyid")
     .put(facultiesCtrl.update);
+
+    /* TERMS CONTROLLER */
+    app.route("/terms")
+    .get(termsCtrl.get)
+    .post(termsCtrl.post);
+    app.route("/terms/:termindex/:termyear")
+    .put(termsCtrl.update);
 
     /* PRODUCTS CONTROLLER */
     app.route("/products")

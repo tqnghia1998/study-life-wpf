@@ -1,23 +1,13 @@
 ﻿using Client.Classes;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using xNet;
 
 namespace Client.Faculty
@@ -38,22 +28,31 @@ namespace Client.Faculty
                 try
                 {
                     // Lấy JSON các khoa về
-                    string response = new HttpRequest().Get(MainWindow.domainURL + "/faculties").ToString();
+                    HttpRequest http = new HttpRequest();
+                    http.Cookies = MainWindow.cookies;
+                    string httpResponse = http.Get(MainWindow.domainURL + "/faculties").ToString();
 
-                    // Parse thành các đối tượng CFaculty
-                    faculties = JsonConvert.DeserializeObject<ObservableCollection<CFaculty>>(response);
-
-                    // Thêm vào Combobox
-                    Dispatcher.Invoke(() => {
-                        listFaculty.ItemsSource = faculties;
-                        ProgressBar.Visibility = Visibility.Hidden;
-                    });
-
-                    // Thêm vào danh sách tên khoa
-                    foreach (CFaculty faculty in faculties)
+                    if (httpResponse.Equals("Đã hết phiên hoạt động"))
                     {
-                        listFacultyName.Add(faculty.facultyname);
-                    };
+                        new Dialog(Window.GetWindow(this), httpResponse).ShowDialog();
+                    }
+                    else
+                    {
+                        // Parse thành các đối tượng CFaculty
+                        faculties = JsonConvert.DeserializeObject<ObservableCollection<CFaculty>>(httpResponse);
+
+                        // Thêm vào Combobox
+                        Dispatcher.Invoke(() => {
+                            listFaculty.ItemsSource = faculties;
+                            ProgressBar.Visibility = Visibility.Hidden;
+                        });
+
+                        // Thêm vào danh sách tên khoa
+                        foreach (CFaculty faculty in faculties)
+                        {
+                            listFacultyName.Add(faculty.facultyname);
+                        };
+                    }
                 }
                 catch (Exception) { }
             }).Start();
@@ -90,6 +89,7 @@ namespace Client.Faculty
             // Bật 2 button Sửa và Xem
             btnSeeSubjects.IsEnabled = true;
             btnUpdateFaculty.IsEnabled = true;
+            
         }
 
         /// <summary>
@@ -182,6 +182,7 @@ namespace Client.Faculty
 
                 // Tham số cần truyền
                 var request = new HttpRequest();
+                request.Cookies = MainWindow.cookies;
                 request.AddParam("facultyid", faculty.facultyid);
                 request.AddParam("facultyname", faculty.facultyname);
                 request.AddParam("facultyroom", faculty.facultyroom);
@@ -307,27 +308,31 @@ namespace Client.Faculty
         /// </summary>
         private void SearchBar_KeyDown(object sender, KeyEventArgs e)
         {
-            /// DỪNG LẠI Ở ĐÂY
-            /// //////////////
-            /// //////////////
-
-            //if (e.Key == Key.Return)
-            //{
-            //    editFacultyName.Clear();
-            //    editFacultyId.Clear();
-            //    editFacultyRoom.Clear();
-            //    editFacultyPhone.Clear();
-            //    editFacultyEmail.Clear();
-            //    ObservableCollection<CFaculty> tempFaculties = new ObservableCollection<CFaculty>();
-            //    foreach (CFaculty faculty in faculties)
-            //    {
-            //        if (faculty.facultyname.ToUpper().Contains(searchBar.Text.ToUpper()))
-            //        {
-            //            tempFaculties.Add(faculty);
-            //        }
-            //    }
-            //    listFaculty.ItemsSource = tempFaculties;
-            //}
+            if (e.Key == Key.Return)
+            {
+                if (searchBar.Text == string.Empty)
+                {
+                    if (listFaculty.Items.Count > 0)
+                    {
+                        listFaculty.SelectedIndex = 0;
+                        listFaculty.ScrollIntoView(listFaculty.Items[0]);
+                    }
+                    return;
+                }
+                editFacultyName.Clear();
+                editFacultyId.Clear();
+                editFacultyRoom.Clear();
+                editFacultyPhone.Clear();
+                editFacultyEmail.Clear();
+                foreach (CFaculty faculty in faculties)
+                {
+                    if (faculty.facultyname.ToUpper().Contains(searchBar.Text.ToUpper()))
+                    {
+                        listFaculty.SelectedItem = faculty;
+                        return;
+                    }
+                }
+            }
         }
     }
 

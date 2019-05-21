@@ -1,15 +1,16 @@
-﻿<Page x:Class="Client.Faculty.PageFaculty"
+﻿<Page x:Class="Client.Term.PageTerm"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
-      xmlns:local="clr-namespace:Client.Faculty"
-      mc:Ignorable="d"
+      xmlns:local="clr-namespace:Client.Term"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
       SizeChanged="Page_SizeChanged"
       FontFamily="Sitka Subheading"
-      Title="Faculty">
+      Title="Term">
 
     <!--Reference của hàm chuyển đổi STT cho List View-->
     <Page.Resources>
@@ -57,7 +58,7 @@
         </Button>
 
         <!--Title-->
-        <Label Content="DANH SÁCH KHOA"
+        <Label Content="DANH SÁCH HỌC KỲ"
                Grid.ColumnSpan="2"
                FontFamily="Sitka Subheading"
                FontSize="22"
@@ -67,14 +68,14 @@
                HorizontalAlignment="Center"/>
 
         <!--Faculty list-->
-        <ListView Name="listFaculty"
+        <ListView Name="listTerms"
                   Grid.Row="1"
                   Grid.ColumnSpan="2"
                   FontFamily="Sitka Subheading"
                   FontSize="15"
                   Margin="8,0,0,0"
                   Foreground="Black"
-                  SelectionChanged="ListFaculty_SelectionChanged"
+                  SelectionChanged="ListTerm_SelectionChanged"
                   HorizontalAlignment="Left">
             <ListView.Resources>
                 <Style TargetType="TextBlock">
@@ -123,10 +124,10 @@
                             </DataTemplate>
                         </GridViewColumn.HeaderTemplate>
                     </GridViewColumn>
-                    <!--Faculty name-->
-                    <GridViewColumn x:Name="nameFaculty"
-                        Width="285"
-                        DisplayMemberBinding="{Binding facultyname}">
+                    <!--Term index-->
+                    <GridViewColumn x:Name="indexTerm"
+                        Width="150"
+                        DisplayMemberBinding="{Binding termindex}">
                         <GridViewColumn.HeaderTemplate>
                             <DataTemplate>
                                 <Border>
@@ -137,7 +138,7 @@
                                             ShadowDepth="1"
                                             BlurRadius="5"/>
                                     </Border.Effect>
-                                    <Label Content="Tên khoa"
+                                    <Label Content="Học kỳ"
                                        Padding="1"
                                        FontSize="15"
                                        Foreground="Black"
@@ -146,10 +147,10 @@
                             </DataTemplate>
                         </GridViewColumn.HeaderTemplate>
                     </GridViewColumn>
-                    <!--Faculty id-->
+                    <!--Term year-->
                     <GridViewColumn
-                        Width="120"
-                        DisplayMemberBinding="{Binding facultyid}">
+                        Width="200"
+                        DisplayMemberBinding="{Binding termyear}">
                         <GridViewColumn.HeaderTemplate>
                             <DataTemplate>
                                 <Border>
@@ -160,7 +161,7 @@
                                             ShadowDepth="1"
                                             BlurRadius="5"/>
                                     </Border.Effect>
-                                    <Label Content="Mã khoa"
+                                    <Label Content="Năm học"
                                        Padding="1"
                                        FontSize="15"
                                        Foreground="Black"
@@ -169,10 +170,10 @@
                             </DataTemplate>
                         </GridViewColumn.HeaderTemplate>
                     </GridViewColumn>
-                    <!--Faculty room-->
+                    <!--Begin date-->
                     <GridViewColumn
-                        Width="120"
-                        DisplayMemberBinding="{Binding facultyroom}">
+                        Width="225"
+                        DisplayMemberBinding="{Binding begindate}">
                         <GridViewColumn.HeaderTemplate>
                             <DataTemplate>
                                 <Border>
@@ -183,7 +184,7 @@
                                             ShadowDepth="1"
                                             BlurRadius="5"/>
                                     </Border.Effect>
-                                    <Label Content="Phòng ban"
+                                    <Label Content="Ngày bắt đầu"
                                        Padding="1"
                                        FontSize="15"
                                        Foreground="Black"
@@ -192,10 +193,10 @@
                             </DataTemplate>
                         </GridViewColumn.HeaderTemplate>
                     </GridViewColumn>
-                    <!--Faculty email-->
+                    <!--End date-->
                     <GridViewColumn
-                        Width="250"
-                        DisplayMemberBinding="{Binding facultyemail}">
+                        Width="225"
+                        DisplayMemberBinding="{Binding enddate}">
                         <GridViewColumn.HeaderTemplate>
                             <DataTemplate>
                                 <Border>
@@ -206,30 +207,7 @@
                                             ShadowDepth="1"
                                             BlurRadius="5"/>
                                     </Border.Effect>
-                                    <Label Content="Email liên hệ"
-                                       Padding="1"
-                                       FontSize="15"
-                                       Foreground="Black"
-                                       FontWeight="Bold"/>
-                                </Border>
-                            </DataTemplate>
-                        </GridViewColumn.HeaderTemplate>
-                    </GridViewColumn>
-                    <!--Faculty phone-->
-                    <GridViewColumn
-                        Width="130"
-                        DisplayMemberBinding="{Binding facultyphone}">
-                        <GridViewColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <Border>
-                                    <Border.Effect>
-                                        <DropShadowEffect
-                                            Color="White"
-                                            Direction="270"
-                                            ShadowDepth="1"
-                                            BlurRadius="5"/>
-                                    </Border.Effect>
-                                    <Label Content="Số điện thoại"
+                                    <Label Content="Ngày kết thúc"
                                        Padding="1"
                                        FontSize="15"
                                        Foreground="Black"
@@ -243,65 +221,59 @@
 
         </ListView>
 
-        <!--Faculty Id-->
-        <TextBox Grid.Row="2"
+        <!--Term index-->
+        <ComboBox Grid.Row="2"
                  Margin="15,10,15,20"
-                 materialDesign:HintAssist.Hint="Mã khoa"
+                 materialDesign:HintAssist.Hint="Học kỳ"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
                  VerticalAlignment="Top"
                  IsEnabled="False"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Name="editFacultyId"/>
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editTermIndex">
+            <ComboBoxItem Content="I"/>
+            <ComboBoxItem Content="II"/>
+            <ComboBoxItem Content="III"/>
+        </ComboBox>
 
-        <!--Faculty name-->
-        <TextBox Grid.Row="2" Grid.Column="1"
+        <!--Term year-->
+        <ComboBox Grid.Row="2" Grid.Column="1"
                  Margin="15,10,15,0"
-                 materialDesign:HintAssist.Hint="Tên khoa"
+                 materialDesign:HintAssist.Hint="Năm học"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
                  VerticalAlignment="Top"
                  IsEnabled="False"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Name="editFacultyName"/>
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editTermYear"/>
 
-        <!--Faculty room-->
-        <TextBox Grid.Row="2"
-                 Margin="15,60,15,20"
-                 materialDesign:HintAssist.Hint="Phòng ban"
+        <!--Begin date-->
+        <DatePicker Grid.Row="2"
+                 Margin="15,80,15,20"
+                 materialDesign:HintAssist.Hint="Ngày bắt đầu"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
                  VerticalAlignment="Top"
                  IsEnabled="False"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Name="editFacultyRoom"/>
+                 Name="editBeginDate"/>
 
-        <!--Faculty email-->
-        <TextBox Grid.Row="2" Grid.Column="1"
-                 Margin="15,60,15,0"
-                 materialDesign:HintAssist.Hint="Email liên hệ"
+        <!--End date-->
+        <DatePicker Grid.Row="2" Grid.Column="1"
+                 Margin="15,80,15,0"
+                 materialDesign:HintAssist.Hint="Ngày kết thúc"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
                  VerticalAlignment="Top"
                  IsEnabled="False"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Name="editFacultyEmail"/>
-
-        <!--Faculty phone-->
-        <TextBox Grid.Row="2"
-                 Margin="15,110,15,20"
-                 materialDesign:HintAssist.Hint="Số điện thoại"
-                 FontSize="16"
-                 Background="Transparent"
-                 FontWeight="Bold"
-                 VerticalAlignment="Top"
-                 IsEnabled="False"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Name="editFacultyPhone"/>
+                 Name="editEndDate"/>
 
         <!--Button add-->
         <Button Grid.Column="1"
@@ -314,8 +286,8 @@
                 Margin="15,110,0,20"
                 HorizontalAlignment="Left"
                 Style="{StaticResource MaterialDesignRaisedButton}"
-                Name="btnAddFaculty"
-                Click="BtnAddFaculty_Click">
+                Name="btnAddTerm"
+                Click="BtnAddTerm_Click">
         </Button>
 
         <!--Button edit-->
@@ -329,15 +301,15 @@
                 Margin="0,110,0,20"
                 IsEnabled="False"
                 Style="{StaticResource MaterialDesignRaisedButton}"
-                Name="btnUpdateFaculty"
-                Click="BtnUpdateFaculty_Click">
+                Name="btnUpdateTerm"
+                Click="BtnUpdateTerm_Click">
         </Button>
 
         <!--Button see subjects-->
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Width="130"
-                Content="Xem môn học"
+                Content="Xem số liệu"
                 FontWeight="Bold"
                 Foreground="White"
                 FontSize="15"
@@ -345,10 +317,10 @@
                 HorizontalAlignment="Right"
                 IsEnabled="False"
                 Style="{StaticResource MaterialDesignRaisedButton}"
-                Name="btnSeeSubjects"
-                Click="BtnSeeSubjects_Click">
+                Name="btnSeeStatistic"
+                Click="BtnSeeStatistic_Click">
         </Button>
-        
+
         <!--Search bar-->
         <TextBox Name="searchBar"
                  KeyDown="SearchBar_KeyDown"
@@ -360,7 +332,7 @@
                  VerticalAlignment="Top"
 		         HorizontalAlignment="Right"
                  materialDesign:HintAssist.Hint="Tìm kiếm"
-		         behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding listFacultyName}" 
+		         behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding listTermYear}" 
 		         behaviors:AutoCompleteBehavior.AutoCompleteStringComparison="InvariantCultureIgnoreCase">
             <TextBox.Background>
                 <ImageBrush ImageSource="../Images/Search.png"

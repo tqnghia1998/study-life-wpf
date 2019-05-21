@@ -291,3 +291,5 @@ E:\Git\PTTKPM\CLIENT\Client\obj\Debug\Faculty\PageFaculty.g.cs
 E:\Git\PTTKPM\CLIENT\Client\bin\Debug\WPFTextBoxAutoComplete.dll
 E:\Git\PTTKPM\CLIENT\Client\bin\Debug\WPFTextBoxAutoComplete.pdb
 E:\Git\PTTKPM\CLIENT\Client\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Git\PTTKPM\CLIENT\Client\obj\Debug\Term\PageTerm.g.cs
+E:\Git\PTTKPM\CLIENT\Client\obj\Debug\Term\PageTerm.baml

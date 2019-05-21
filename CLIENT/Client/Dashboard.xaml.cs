@@ -1,4 +1,5 @@
 ﻿using Client.Faculty;
+using Client.Term;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,7 +81,7 @@ namespace Client
             else if (img.Tag.Equals("imgManageSubject"))
                 NavigationService.Navigate(new Login());
             else if (img.Tag.Equals("imgManageTerm"))
-                NavigationService.Navigate(new Login());
+                NavigationService.Navigate(new PageTerm());
             else NavigationService.Navigate(new Login());
         }
     }
