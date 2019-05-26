@@ -1,0 +1,330 @@
+﻿<Page x:Class="Client.Subject.PageSubject"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+      xmlns:local="clr-namespace:Client.Subject"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      SizeChanged="Page_SizeChanged"
+      FontFamily="Sitka Subheading"
+      Title="Faculty">
+
+    <!--Reference của hàm chuyển đổi STT cho List View-->
+    <Page.Resources>
+        <local:DataConverter x:Key="IndexConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Backward & Forward-->
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Command="{x:Static NavigationCommands.BrowseBack}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowLeft"
+                Height="20"
+                Width="20" />
+        </Button>
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Margin="28,0,0,0"
+            Command="{x:Static NavigationCommands.BrowseForward}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowRight"
+                Height="20"
+                Width="20" />
+        </Button>
+
+        <!--Title-->
+        <Label Content="DANH SÁCH MÔN HỌC"
+               Grid.ColumnSpan="2"
+               FontFamily="Sitka Subheading"
+               FontSize="22"
+               Padding="0"
+               FontWeight="Bold"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Center"/>
+
+        <!--Subject list-->
+        <ListView Name="listSubject"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  FontFamily="Sitka Subheading"
+                  FontSize="15"
+                  Margin="8,0,0,0"
+                  Foreground="Black"
+                  SelectionChanged="ListSubject_SelectionChanged"
+                  HorizontalAlignment="Left">
+            <ListView.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                </Style>
+            </ListView.Resources>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Blue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                    <Setter Property="Height" Value="35"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <!--Design columns-->
+            <ListView.View>
+                <GridView>
+                    <!--Index-->
+                    <GridViewColumn
+                        Width="65"
+                        DisplayMemberBinding="{
+                        Binding RelativeSource={RelativeSource FindAncestor,
+                        AncestorType={x:Type ListViewItem}}, 
+                        Converter={StaticResource IndexConverter}}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="STT"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <!--Subject name-->
+                    <GridViewColumn x:Name="nameSubject"
+                        Width="500"
+                        DisplayMemberBinding="{Binding subjectname}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="Tên môn học"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <!--Subject id-->
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding subjectid}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="Mã môn học"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <!--Subject credit-->
+                    <GridViewColumn
+                        Width="160"
+                        DisplayMemberBinding="{Binding credit}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="White"
+                                            Direction="270"
+                                            ShadowDepth="1"
+                                            BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <Label Content="Số tín chỉ"
+                                       Padding="1"
+                                       FontSize="15"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+
+        <!--Teacher name-->
+        <TextBox Grid.Row="2"
+                 Margin="15,10,15,20"
+                 materialDesign:HintAssist.Hint="Giáo viên phụ trách"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsReadOnly="True"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editTeacherName"/>
+
+        <!--Term index-->
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 Margin="15,10,15,0"
+                 materialDesign:HintAssist.Hint="Học kỳ"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsReadOnly="True"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editTermIndex"/>
+
+        <!--Term year-->
+        <TextBox Grid.Row="2"
+                 Margin="15,60,15,20"
+                 materialDesign:HintAssist.Hint="Năm học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsReadOnly="True"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editTermYear"/>
+
+        <!--Faculty-->
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 Margin="15,60,15,0"
+                 materialDesign:HintAssist.Hint="Thuộc khoa"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsReadOnly="True"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editFaculty"/>
+        
+        <!--Button add-->
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                Width="130"
+                Content="Thêm"
+                FontWeight="Bold"
+                Foreground="White"
+                FontSize="15"
+                Margin="15,110,0,20"
+                HorizontalAlignment="Left"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Name="btnAddSubject"
+                Click="BtnAddSubject_Click">
+        </Button>
+
+        <!--Button edit-->
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                Width="130"
+                Content="Xem chi tiết"
+                FontWeight="Bold"
+                Foreground="White"
+                FontSize="15"
+                Margin="0,110,0,20"
+                IsEnabled="False"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Name="btnUpdateSubject"
+                Click="BtnUpdateSubject_Click">
+        </Button>
+
+        <!--Button see statistic-->
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                Width="130"
+                Content="Xem số liệu"
+                FontWeight="Bold"
+                Foreground="White"
+                FontSize="15"
+                Margin="0,110,15,20"
+                HorizontalAlignment="Right"
+                IsEnabled="False"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Name="btnSeeStatistic">
+        </Button>
+
+        <!--Search bar-->
+        <TextBox Name="searchBar"
+                 KeyDown="SearchBar_KeyDown"
+                 Grid.Column="1"
+		         Width="250"
+                 Height="35"
+                 FontSize="15"
+                 Padding="0,0,16,0"
+                 VerticalAlignment="Top"
+		         HorizontalAlignment="Right"
+                 materialDesign:HintAssist.Hint="Tìm kiếm"
+		         behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding listSubjectName}" 
+		         behaviors:AutoCompleteBehavior.AutoCompleteStringComparison="InvariantCultureIgnoreCase">
+            <TextBox.Background>
+                <ImageBrush ImageSource="../Images/Search.png"
+                            AlignmentX="Right"
+                            Stretch="None"/>
+            </TextBox.Background>
+        </TextBox>
+
+        <!--Progressbar loading-->
+        <ProgressBar Grid.Row="1" Grid.ColumnSpan="2"
+                     Width="25" Height="25"
+                     Style="{StaticResource MaterialDesignCircularProgressBar}"
+                     x:Name="ProgressBar">
+            <ProgressBar.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Value" From="0" To="100" Duration="0:0:1" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </ProgressBar.Triggers>
+        </ProgressBar>
+    </Grid>
+</Page>

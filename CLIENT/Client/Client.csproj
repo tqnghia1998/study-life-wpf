@@ -99,6 +99,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\CSchedule.cs" />
+    <Compile Include="Classes\CSubject.cs" />
+    <Compile Include="Subject\PageDetailSubject.xaml.cs">
+      <DependentUpon>PageDetailSubject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Subject\PageSubject.xaml.cs">
+      <DependentUpon>PageSubject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Term\PageTerm.xaml.cs">
       <DependentUpon>PageTerm.xaml</DependentUpon>
     </Compile>
@@ -151,6 +159,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Subject\PageDetailSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Subject\PageSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Term\PageTerm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

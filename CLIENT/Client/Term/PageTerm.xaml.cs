@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -62,9 +63,6 @@ namespace Client.Term
                 }
                 catch (Exception) { }
             }).Start();
-
-            // Thiết lập thanh tìm kiếm
-            searchBar.DataContext = this;
         }
 
         /// <summary>
@@ -261,6 +259,10 @@ namespace Client.Term
                 // Bật lại button Thêm và List View
                 btnAddTerm.IsEnabled = true;
                 listTerms.IsEnabled = true;
+
+                // Sắp xếp lại
+                SortBar_SelectionChanged(null, null);
+                listTerms.SelectedItem = term;
             }
         }
 
@@ -319,35 +321,36 @@ namespace Client.Term
 
             }
         }
-
         /// <summary>
-        /// Tìm kiếm theo năm
+        /// Sắp xếp theo thời gian
         /// </summary>
-        private void SearchBar_KeyDown(object sender, KeyEventArgs e)
+        private void SortBar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.Key == Key.Return)
+            if (terms == null) return;
+            bool isAscending = sortBar.SelectedIndex == 0;
+            for (int i = 0; i < terms.Count; i++)
             {
-                if (searchBar.Text == string.Empty)
+                for (int j = 0; j < terms.Count; j++)
                 {
-                    if (listTerms.Items.Count > 0)
+                    if (compareTerms(terms[i], terms[j], isAscending))
                     {
-                        listTerms.SelectedIndex = 0;
-                        listTerms.ScrollIntoView(listTerms.Items[0]);
-                    }
-                    return;
-                }
-                editTermIndex.Text = string.Empty;
-                editTermYear.Text = string.Empty;
-                editBeginDate.Text = string.Empty;
-                editEndDate.Text = string.Empty;
-                foreach (CTerm term in terms)
-                {
-                    if (term.termyear.ToUpper().Contains(searchBar.Text.ToUpper()))
-                    {
-                        listTerms.SelectedItem = term;
-                        return;
+                        CTerm temp = terms[i];
+                        terms[i] = terms[j];
+                        terms[j] = temp;
                     }
                 }
+            }
+        }
+
+        private bool compareTerms(CTerm a, CTerm b, bool typeCompare)
+        {
+            if (typeCompare == true)
+            {
+                return (a.termyear.Equals(b.termyear)) ? string.Compare(a.termindex, b.termindex) < 0: string.Compare(a.termyear, b.termyear) < 0;
+            }
+            else
+            {
+                return (a.termyear.Equals(b.termyear)) ? string.Compare(a.termindex, b.termindex) > 0 : string.Compare(a.termyear, b.termyear) > 0;
             }
         }
     }

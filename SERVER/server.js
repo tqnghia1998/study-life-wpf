@@ -13,7 +13,11 @@ app.use(bodyParser.json());
 
 // Use session to save cookie
 const expressSession = require("express-session");
-app.use(expressSession({secret: "keyboard cat"}));
+app.use(expressSession({
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: true
+}));
 
 // User passport to authenticate
 const passport = require("passport");

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Git\PTTKPM\CLIENT\Client\obj\Debug\
+E:\Git\PTTKPM\PTTKPM\CLIENT\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-E:\Git\PTTKPM\CLIENT\Client\App.xaml
-7-1799341945
+E:\Git\PTTKPM\PTTKPM\CLIENT\Client\App.xaml
+9-1146722062
 
-17-1780093583
-136-607841142
-Custom\Dialog.xaml;Dashboard.xaml;Faculty\PageFaculty.xaml;Login\Login.xaml;Login\Register.xaml;MainWindow.xaml;Term\PageTerm.xaml;
+21-641179565
+136-34850685
+Custom\Dialog.xaml;Dashboard.xaml;Faculty\PageFaculty.xaml;Login\Login.xaml;Login\Register.xaml;MainWindow.xaml;Subject\PageDetailSubject.xaml;Subject\PageSubject.xaml;Term\PageTerm.xaml;
 
 True
 

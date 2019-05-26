@@ -1,4 +1,5 @@
 ﻿using Client.Faculty;
+using Client.Subject;
 using Client.Term;
 using System;
 using System.Collections.Generic;
@@ -77,12 +78,21 @@ namespace Client
         {
             Image img = sender as Image;
             if (img.Tag.Equals("imgManageFaculty"))
+            {
                 NavigationService.Navigate(new PageFaculty());
+            }
             else if (img.Tag.Equals("imgManageSubject"))
-                NavigationService.Navigate(new Login());
+            {
+                NavigationService.Navigate(new PageSubject());
+            }
             else if (img.Tag.Equals("imgManageTerm"))
+            {
                 NavigationService.Navigate(new PageTerm());
-            else NavigationService.Navigate(new Login());
+            }
+            else
+            {
+                // Tính năng xem thống kê chưa hoàn thành
+            }
         }
     }
 }

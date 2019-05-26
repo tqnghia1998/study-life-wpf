@@ -4,6 +4,9 @@ module.exports = function(app) {
     const facultiesCtrl = require("./controllers/FacultiesController");
     const productsCtrl = require("./controllers/ProductsController");
     const termsCtrl = require("./controllers/TermsController");
+    const subjectsCtrl = require("./controllers/SubjectsController");
+    const schedulesCtrl = require("./controllers/SchedulesController");
+
 
     /* LOGIN CONTROLLER */
     app.route("/login")
@@ -30,6 +33,22 @@ module.exports = function(app) {
     .post(termsCtrl.post);
     app.route("/terms/:termindex/:termyear")
     .put(termsCtrl.update);
+
+    /* SUBJECT CONTROLLER */
+    app.route("/subjects")
+    .get(subjectsCtrl.get)
+    .post(subjectsCtrl.post);
+    app.route("/subjects/:subjectid")
+    .put(subjectsCtrl.update);
+    
+    /* SCHEDULE CONTROLLER */
+    app.route("/schedules/:subjectid")
+    .get(schedulesCtrl.get);
+    app.route("/schedules")
+    .post(schedulesCtrl.post);
+    app.route("/schedules/:subjectid/:day")
+    .put(schedulesCtrl.update)
+    .delete(schedulesCtrl.delete);
 
     /* PRODUCTS CONTROLLER */
     app.route("/products")

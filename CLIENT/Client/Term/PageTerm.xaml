@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
       xmlns:local="clr-namespace:Client.Term"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
@@ -321,25 +320,21 @@
                 Click="BtnSeeStatistic_Click">
         </Button>
 
-        <!--Search bar-->
-        <TextBox Name="searchBar"
-                 KeyDown="SearchBar_KeyDown"
+        <!--Sort bar-->
+        <ComboBox Name="sortBar"
+                 SelectionChanged="SortBar_SelectionChanged"
                  Grid.Column="1"
-		         Width="250"
-                 Height="35"
+		         Width="200"
                  FontSize="15"
-                 Padding="0,0,16,0"
+                 Padding="0,5,16,0"
                  VerticalAlignment="Top"
 		         HorizontalAlignment="Right"
-                 materialDesign:HintAssist.Hint="Tìm kiếm"
-		         behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding listTermYear}" 
-		         behaviors:AutoCompleteBehavior.AutoCompleteStringComparison="InvariantCultureIgnoreCase">
-            <TextBox.Background>
-                <ImageBrush ImageSource="../Images/Search.png"
-                            AlignmentX="Right"
-                            Stretch="None"/>
-            </TextBox.Background>
-        </TextBox>
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}">
+            <ComboBoxItem Content="Tăng dần theo thời gian" IsSelected="True"/>
+            <ComboBoxItem Content="Giảm dần theo thời gian"/>
+        </ComboBox>
 
         <!--Progressbar loading-->
         <ProgressBar Grid.Row="1" Grid.ColumnSpan="2"

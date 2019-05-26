@@ -1,0 +1,455 @@
+﻿<Page x:Class="Client.Subject.PageDetailSubject"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client.Subject"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DetailSubject">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Backward & Forward-->
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Command="{x:Static NavigationCommands.BrowseBack}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowLeft"
+                Height="20"
+                Width="20" />
+        </Button>
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Margin="28,0,0,0"
+            Command="{x:Static NavigationCommands.BrowseForward}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowRight"
+                Height="20"
+                Width="20" />
+        </Button>
+
+        <!--Title-->
+        <Label Content="THÊM MÔN HỌC"
+               Grid.ColumnSpan="4"
+               FontFamily="Sitka Subheading"
+               FontSize="22"
+               Padding="0"
+               FontWeight="Bold"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Center"/>
+
+        <!--Subject id-->
+        <TextBox Grid.Row="1"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Mã môn học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editSubjectId"/>
+
+        <!--Subject name-->
+        <TextBox Grid.Row="1"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Tên môn học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editSubjectName"/>
+
+        <!--Teacher name-->
+        <TextBox Grid.Row="1"
+                 Grid.Column="3"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giáo viên phụ trách"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editTeacherName"/>
+
+        <!--Credit-->
+        <ComboBox Grid.Row="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Số tín chỉ"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editCredit">
+            <ComboBoxItem Content="0"/>
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+            <ComboBoxItem Content="6"/>
+        </ComboBox>
+
+        <!--Term index-->
+        <ComboBox Grid.Row="2"
+                 Grid.Column="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Học kỳ"
+                 FontSize="16"
+                 DisplayMemberPath="termindex"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editTermIndex">
+        </ComboBox>
+
+        <!--Term year-->
+        <ComboBox Grid.Row="2" Grid.Column="1"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Năm học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editTermYear"/>
+
+        <!--Faculty-->
+        <ComboBox Grid.Row="2" Grid.Column="3"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Khoa"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 DisplayMemberPath="facultyname"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editFaculty"/>
+
+        <!--Button save-->
+        <Button Grid.Column="3"
+                Width="80"
+                Padding="0"
+                Content="Lưu lại"
+                FontWeight="Bold"
+                Foreground="White"
+                FontSize="13"
+                Margin="15,0,15,0"
+                HorizontalAlignment="Right"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Name="btnAddSubject"
+                Click="BtnAddSubject_Click" Height="Auto">
+        </Button>
+
+        <!--Monday-->
+        <CheckBox Grid.Row="3"
+                  Margin="15,10,15,10"
+                  Content="Thứ hai"
+                  FontSize="16"
+                  FontFamily="Sitka Subheading"
+                  Name="checkMonday"/>
+        <TextBox Grid.Row="3"
+                 Grid.Column="3"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Phòng học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=checkMonday, Path=IsChecked}"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editRoomMonday"/>
+        <ComboBox Grid.Row="3"
+                 Grid.Column="1"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ bắt đầu"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkMonday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editStartTimeMonday"/>
+        <ComboBox Grid.Row="3"
+                 Grid.Column="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ kết thúc"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkMonday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editFinishTimeMonday"/>
+
+        <!--Tuesday-->
+        <CheckBox Grid.Row="4"
+                  Margin="15,10,15,10"
+                  Content="Thứ ba"
+                  FontSize="16"
+                  FontFamily="Sitka Subheading"
+                  Name="checkTuesday"/>
+        <TextBox Grid.Row="4"
+                 Grid.Column="3"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Phòng học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=checkTuesday, Path=IsChecked}"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editRoomTuesday"/>
+        <ComboBox Grid.Row="4"
+                 Grid.Column="1"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ bắt đầu"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkTuesday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editStartTimeTuesday"/>
+        <ComboBox Grid.Row="4"
+                 Grid.Column="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ kết thúc"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkTuesday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editFinishTimeTuesday"/>
+
+        <!--Wednesday-->
+        <CheckBox Grid.Row="5"
+                  Margin="15,10,15,10"
+                  Content="Thứ tư"
+                  FontSize="16"
+                  FontFamily="Sitka Subheading"
+                  Name="checkWednesday"/>
+        <TextBox Grid.Row="5"
+                 Grid.Column="3"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Phòng học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=checkWednesday, Path=IsChecked}"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editRoomWednesday"/>
+        <ComboBox Grid.Row="5"
+                 Grid.Column="1"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ bắt đầu"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkWednesday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editStartTimeWednesday"/>
+        <ComboBox Grid.Row="5"
+                 Grid.Column="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ kết thúc"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkWednesday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editFinishTimeWednesday"/>
+
+        <!--Thursday-->
+        <CheckBox Grid.Row="6"
+                  Margin="15,10,15,10"
+                  Content="Thứ năm"
+                  FontSize="16"
+                  FontFamily="Sitka Subheading"
+                  Name="checkThursday"/>
+        <TextBox Grid.Row="6"
+                 Grid.Column="3"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Phòng học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=checkThursday, Path=IsChecked}"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editRoomThursday"/>
+        <ComboBox Grid.Row="6"
+                 Grid.Column="1"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ bắt đầu"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkThursday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editStartTimeThursday"/>
+        <ComboBox Grid.Row="6"
+                 Grid.Column="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ kết thúc"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkThursday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editFinishTimeThursday"/>
+
+        <!--Friday-->
+        <CheckBox Grid.Row="7"
+                  Margin="15,10,15,10"
+                  Content="Thứ sáu"
+                  FontSize="16"
+                  FontFamily="Sitka Subheading"
+                  Name="checkFriday"/>
+        <TextBox Grid.Row="7"
+                 Grid.Column="3"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Phòng học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=checkFriday, Path=IsChecked}"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editRoomFriday"/>
+        <ComboBox Grid.Row="7"
+                 Grid.Column="1"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ bắt đầu"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkFriday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editStartTimeFriday"/>
+        <ComboBox Grid.Row="7"
+                 Grid.Column="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ kết thúc"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkFriday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editFinishTimeFriday"/>
+
+        <!--Saturday-->
+        <CheckBox Grid.Row="8"
+                  Margin="15,10,15,10"
+                  Content="Thứ bảy"
+                  FontSize="16"
+                  FontFamily="Sitka Subheading"
+                  Name="checkSaturday"/>
+        <TextBox Grid.Row="8"
+                 Grid.Column="3"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Phòng học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=checkSaturday, Path=IsChecked}"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Name="editRoomSaturday"/>
+        <ComboBox Grid.Row="8"
+                 Grid.Column="1"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ bắt đầu"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkSaturday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editStartTimeSaturday"/>
+        <ComboBox Grid.Row="8"
+                 Grid.Column="2"
+                 Margin="15,0,15,0"
+                 materialDesign:HintAssist.Hint="Giờ kết thúc"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 DropDownOpened="Combobox_DropDownOpened"
+                 DropDownClosed="Combobox_DropDownClosed"
+                 IsEnabled="{Binding ElementName=checkSaturday, Path=IsChecked}"
+                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                 Name="editFinishTimeSaturday"/>
+    </Grid>
+</Page>

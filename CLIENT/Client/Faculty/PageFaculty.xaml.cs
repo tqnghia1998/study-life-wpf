@@ -75,7 +75,7 @@ namespace Client.Faculty
         /// </summary>
         private void ListFaculty_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Lấy đối tượng ProductType tương ứng
+            // Lấy đối tượng CFaculty tương ứng
             if (listFaculty.SelectedItem == null) return;
             CFaculty faculty = listFaculty.SelectedItem as CFaculty;
 
