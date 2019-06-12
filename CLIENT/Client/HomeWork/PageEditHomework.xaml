@@ -1,0 +1,163 @@
+﻿<Page x:Class="Client.HomeWork.PageEditHomework"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Client.HomeWork"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="PageEditHomework">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.ColumnSpan="3" 
+            FontFamily="Sitka Subheading"
+            FontSize="30"
+            Padding="0"
+            FontWeight="Bold"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">Cập nhật thông tin bài tập</Label>
+
+        <Label
+            Grid.Row="1"
+            FontFamily="Sitka Subheading"
+            FontSize="20"
+            Padding="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center" Margin="0,18,18,18">Tên bài tập</Label>
+
+        <Label
+            Grid.Row="2"
+            FontFamily="Sitka Subheading"
+            FontSize="20"
+            Padding="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top" Margin="0,22,18,0">Môn học</Label>
+
+        <Label
+            Grid.Row="3"
+            FontFamily="Sitka Subheading"
+            FontSize="20"
+            Padding="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center" Margin="0,24,18,12">Hạn chót</Label>
+
+        <Label
+            Grid.Row="4"
+            FontFamily="Sitka Subheading"
+            FontSize="20"
+            Padding="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top" Margin="0,22,18,0">Mô tả</Label>
+
+        <Label
+            Grid.Row="5"
+            FontFamily="Sitka Subheading"
+            FontSize="20"
+            Padding="0"
+            HorizontalAlignment="Right" Margin="0,22,18,23">Tiến độ</Label>
+
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="1"
+            FontSize="20"
+            Background="Transparent"
+            FontFamily="Sitka Subheading"
+
+            VerticalAlignment="Center"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,1,0,13"
+            />
+
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="2"
+            FontSize="20"
+            Background="Transparent"
+            FontFamily="Sitka Subheading"
+
+            VerticalAlignment="Center"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            />
+
+        <DatePicker
+            Grid.Column="1"
+            Grid.Row="3"
+            FontSize="20"
+            Background="Transparent"
+            FontFamily="Sitka Subheading"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="4"
+            Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            Margin="0,5,0,0"
+            FontSize="20"
+            materialDesign:HintAssist.IsFloating="False"
+            FontFamily="Sitka Subheading"
+            VerticalScrollBarVisibility="Auto"/>
+
+        <Slider
+            Grid.Column="1"
+            Grid.Row="5"
+            Minimum="0"
+            Maximum="100"
+            Style="{StaticResource MaterialDesignDiscreteSlider}"
+            Value="{Binding process}"
+            Width="Auto"/>
+
+        <Grid
+            Grid.Column="1"
+            Grid.Row="6"
+            Margin="10,10,10,0" Height="60" VerticalAlignment="Top">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Column="2"
+                Margin="0,10,10,10"
+                Background="Silver"
+                Foreground="Black"
+                BorderBrush="Silver"
+                VerticalAlignment="Stretch" Height="Auto">
+                Cập nhật
+            </Button>
+
+            <Button
+                Grid.Column="3"
+                Margin="10,10,10,10"
+                
+                Background="Silver"
+                Foreground="Black"
+                BorderBrush="Silver"
+                VerticalAlignment="Stretch" Height="Auto">
+                Huỷ bỏ
+            </Button>
+        </Grid>
+
+    </Grid>
+</Page>

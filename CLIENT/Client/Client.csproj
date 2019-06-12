@@ -101,6 +101,24 @@
     </ApplicationDefinition>
     <Compile Include="Classes\CSchedule.cs" />
     <Compile Include="Classes\CSubject.cs" />
+    <Compile Include="HomeWork\PageAddHomework.xaml.cs">
+      <DependentUpon>PageAddHomework.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HomeWork\PageEditHomework.xaml.cs">
+      <DependentUpon>PageEditHomework.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HomeWork\PageHomework.xaml.cs">
+      <DependentUpon>PageHomework.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Schedule\PageSchedule.xaml.cs">
+      <DependentUpon>PageSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StudentDashboard.xaml.cs">
+      <DependentUpon>StudentDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectStudent\PageApplySubject.xaml.cs">
+      <DependentUpon>PageApplySubject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Subject\PageDetailSubject.xaml.cs">
       <DependentUpon>PageDetailSubject.xaml</DependentUpon>
     </Compile>
@@ -119,6 +137,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Faculty\PageFaculty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HomeWork\PageAddHomework.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HomeWork\PageEditHomework.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HomeWork\PageHomework.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +189,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Schedule\PageSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StudentDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubjectStudent\PageApplySubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Subject\PageDetailSubject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -234,5 +276,11 @@
   <ItemGroup>
     <Resource Include="Images\Search.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ApplySubject.png" />
+    <Resource Include="Images\ManageWork.png" />
+    <Resource Include="Images\Schedule.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

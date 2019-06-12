@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client.HomeWork;
+using Client.SubjectStudent;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +26,7 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
-            _mainFrame.Navigate(new Login());
+            _mainFrame.Navigate(new StudentDashboard());
             domainURL = "http://localhost:6969";
         }
 

@@ -1,0 +1,253 @@
+﻿<Page x:Class="Client.HomeWork.PageHomework"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Client.HomeWork"
+      mc:Ignorable="d" 
+      Height="600" Width="1000"
+      Title="PageHomework">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--Backward & Forward-->
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Command="{x:Static NavigationCommands.BrowseBack}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowLeft"
+                Height="20"
+                Width="20" />
+        </Button>
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Margin="28,0,0,0"
+            Command="{x:Static NavigationCommands.BrowseForward}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowRight"
+                Height="20"
+                Width="20" />
+        </Button>
+
+        <!--Tittle-->
+        <Label 
+            Grid.Row="0" 
+            Grid.Column="1" 
+            FontFamily="Sitka Subheading"
+            FontSize="30"
+            Padding="0"
+            FontWeight="Bold"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">Home Work</Label>
+
+        <!--Thêm bài tập-->
+        <Button
+            Background="Silver"
+            Height="40"
+            Grid.Column="2"
+            Margin="160,0,40,0"
+            Foreground="Black"
+            FontFamily="Sitka Subheading"
+            FontWeight="Bold">
+            Thêm bài tập</Button>
+
+        <!--Search-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+            <TextBox
+                Grid.Column="0"
+                 Margin="15,9,15,19"
+                 materialDesign:HintAssist.Hint="Tìm kiếm theo tên/mã môn học"
+                 FontSize="16"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+
+                 VerticalAlignment="Center"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 x:Name="editSubjectId"/>
+            <Button 
+                Grid.Column="1"
+                BorderBrush="Transparent" 
+                Background="Transparent"
+                VerticalAlignment="Center">
+                <materialDesign:PackIcon Foreground="Black" Kind="Magnify" />
+            </Button>
+        </Grid>
+
+        <!--Lọc-->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                FontFamily="Sitka Subheading"
+                FontSize="16"
+                Margin="18,18,18,19"
+                Padding="0"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">Môn học</Label>
+
+            <ComboBox 
+                Grid.Column="1"
+                Margin="0,0,15,0"
+                materialDesign:HintAssist.Hint="Môn học"
+                FontSize="16"
+                FontFamily="Sitka Subheading"
+                Background="Transparent"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                ItemsSource="{Binding LongListToTestComboVirtualization}"
+                />
+
+            <Label
+                Grid.Column="2"
+                FontFamily="Sitka Subheading"
+                FontSize="16"
+                Margin="18,18,18,19"
+                Padding="0"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">Sắp xếp</Label>
+
+            <ComboBox 
+                Grid.Column="3"
+                Margin="0,0,15,0"
+                materialDesign:HintAssist.Hint="Theo hạn chót"
+                FontSize="16"
+                FontFamily="Sitka Subheading"
+                Background="Transparent"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                ItemsSource="{Binding LongListToTestComboVirtualization}"
+                Name="editTermYear"/>
+        </Grid>
+
+        <!--Danh sách bài tập-->
+        <ListView
+            Grid.Row="2" 
+            Grid.ColumnSpan="3" 
+            x:Name="spListHomeWork" 
+            Margin="0,0,30,50"
+            HorizontalAlignment="Stretch"
+            ScrollViewer.CanContentScroll="False"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="950">
+                        <Expander
+                            Margin="0"
+                            Background="Transparent" 
+                            x:Name="expander1" 
+                            HorizontalAlignment="Stretch" 
+                            Header="{Binding}"  
+                            IsExpanded="False"
+                            FontFamily="Sitka Subheading">
+
+                            <Expander.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="20" Text="{Binding homeworkname}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Expander.HeaderTemplate>
+
+                            <StackPanel Background="Transparent" Orientation="Vertical" >
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,5,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding subjectname}"></TextBlock>
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,5,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding deadline}"></TextBlock>
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,5,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding description}"></TextBlock>
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,5,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="Tiến độ: "></TextBlock>
+
+
+                                <Slider
+                                    Minimum="0"
+                                    Maximum="100"
+                                    Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                    Value="{Binding process}"
+                                    Width="400"/>
+
+                                <StackPanel HorizontalAlignment="Right" Margin="0,20,50,0" Orientation="Horizontal">
+                                    <Button Margin="0,0,10,0" Background="Silver" Foreground="Black" BorderBrush="Transparent"  Width="150" Height="40" >Chỉnh sửa</Button>
+                                    <Button Background="Silver" Foreground="Black" BorderBrush="Transparent"  Width="150" Height="40" >Xoá bài tập</Button>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        
+                    </Expander>
+                    </Grid>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Page>
