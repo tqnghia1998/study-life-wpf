@@ -82,8 +82,8 @@
                VerticalAlignment="Top"
                HorizontalAlignment="Center"/>
 
-            <syncfusion:SfSchedule  x:Name="Schedule" Grid.Row="1" ShowNonWorkingHours="False" WorkEndHour="18" WorkStartHour="6" IsHighLightWorkingHours="True" 
-                                   ScheduleType="Week" Background="White" TimeInterval="ThirtyMin" IntervalHeight="40"
+            <syncfusion:SfSchedule  x:Name="Schedule" Grid.Row="1" ShowNonWorkingHours="False" WorkEndHour="20" WorkStartHour="5" IsHighLightWorkingHours="True" 
+                                   ScheduleType="Week" Background="White" TimeInterval="OneHour" IntervalHeight="40"
                                     AppointmentDragging="Schedule_AppointmentDragging" AppointmentEditorOpening="Schedule_AppointmentEditorOpening" ContextMenuOpening="Schedule_ContextMenuOpening"/>
             
             <StackPanel  Margin="0 0 0 10" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">

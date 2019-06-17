@@ -8,7 +8,7 @@ namespace Client.Classes
 {
     class CRegister
     {
-        public CRegister(string userid, string status, string subjectid, string subjectname, string credit, string teachername, string termindex, string termyear, string faculty, string day, string room, string startime, string finishtime, string facultyname, DateTime begindate, DateTime enddate)
+        public CRegister(string userid, string status, string subjectid, string subjectname, string credit, string teachername, string termindex, string termyear, string faculty, string day, string room, string starttime, string finishtime, string facultyname, DateTime begindate, DateTime enddate)
         {
             this.userid = userid;
             this.status = status;
@@ -21,7 +21,7 @@ namespace Client.Classes
             this.faculty = faculty;
             this.day = day;
             this.room = room;
-            this.startime = startime;
+            this.starttime = starttime;
             this.finishtime = finishtime;
             this.facultyname = facultyname;
             this.begindate = begindate;
@@ -39,7 +39,7 @@ namespace Client.Classes
         public string faculty { get; set; }
         public string day { get; set; }
         public string room { get; set; }
-        public string startime { get; set; }
+        public string starttime { get; set; }
         public string finishtime { get; set; }
         public string facultyname { get; set; }
         public DateTime begindate { get; set; }
@@ -47,6 +47,30 @@ namespace Client.Classes
 
         public CRegister()
         {
+        }
+
+        public DayOfWeek GetLearntDayOfWeek()
+        {
+            switch (day)
+            {
+                case "Thứ hai": return DayOfWeek.Monday;
+                case "Thứ ba": return DayOfWeek.Tuesday;
+                case "Thứ tư": return DayOfWeek.Wednesday;
+                case "Thứ năm": return DayOfWeek.Thursday;
+                case "Thứ sáu": return DayOfWeek.Friday;
+                case "Thứ bảy": return DayOfWeek.Saturday;
+                default: return DayOfWeek.Sunday;
+            }
+        }
+
+        public DayOfWeek GetFirstDayOfWeek()
+        {
+            return begindate.DayOfWeek;
+        }
+
+        public DayOfWeek GetLastDayOfWeek()
+        {
+            return enddate.DayOfWeek;
         }
     }
 }

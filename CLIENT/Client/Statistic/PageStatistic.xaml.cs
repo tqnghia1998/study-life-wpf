@@ -1,4 +1,6 @@
-﻿using Syncfusion.UI.Xaml.Schedule;
+﻿using Client.Classes;
+using Newtonsoft.Json;
+using Syncfusion.UI.Xaml.Schedule;
 using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
@@ -23,10 +25,9 @@ namespace Client.Statistic
 {
     public partial class PageStatistic : Page
     {
-        #region Properties
-        private ObservableCollection<DateTime> MonthlyOccurrance = new ObservableCollection<DateTime>();
-        private ObservableCollection<string> MonthlyOccurranceSubjects = new ObservableCollection<string>() { "Pay House Rent", "Car Service", "Medical Check Up" };
-        #endregion
+        ObservableCollection<CRegister> registers;
+        ScheduleAppointmentCollection appointmentCollection = new ScheduleAppointmentCollection();
+
         public bool AllowAppointmentDrag { get; set; }
 
         public PageStatistic()
@@ -40,15 +41,14 @@ namespace Client.Statistic
             Thread.CurrentThread.CurrentCulture = culture;
 
             // List schedules
-            ScheduleAppointmentCollection AppointmentCollection = new ScheduleAppointmentCollection();
-            Schedule.Appointments = AppointmentCollection;
+            Schedule.Appointments = appointmentCollection;
             
             // Get data from server
             new Thread(() =>
             {
                 try
                 {
-                    // Lấy JSON các khoa về
+                    // Lấy JSON các lịch học về
                     HttpRequest http = new HttpRequest();
                     http.Cookies = MainWindow.cookies;
                     string httpResponse = http.Get(MainWindow.domainURL + "/registers/" + MainWindow.user.userid).ToString();
@@ -59,38 +59,52 @@ namespace Client.Statistic
                     }
                     else
                     {
-                        // Parse thành các đối tượng CFaculty
-                        //faculties = JsonConvert.DeserializeObject<ObservableCollection<CFaculty>>(httpResponse);
+                        // Parse thành các đối tượng CRegister
+                        registers = JsonConvert.DeserializeObject<ObservableCollection<CRegister>>(httpResponse);
 
-                        //// Thêm vào Combobox
-                        //Dispatcher.Invoke(() => {
-                        //    listFaculty.ItemsSource = faculties;
-                        //    ProgressBar.Visibility = Visibility.Hidden;
-                        //});
-
-                        //// Thêm vào danh sách tên khoa
-                        //foreach (CFaculty faculty in faculties)
-                        //{
-                        //    listFacultyName.Add(faculty.facultyname);
-                        //};
+                        // Hiển thị lên UI
+                        Dispatcher.Invoke(() => {
+                            showSchedules();
+                        });
                     }
                 }
                 catch (Exception) { }
             }).Start();
 
-            // Create a appoinment
-            //var appointment = new ScheduleAppointment()
-            //{
-            //    StartTime = DateTime.Now.AddHours(-8).AddMinutes(15),
-            //    EndTime = DateTime.Now.AddHours(-6),
-            //    AppointmentBackground = new SolidColorBrush(Color.FromArgb(0xFF, 0xD8, 0x00, 0x73)),
-            //    Subject = "Họp ban cán sự lớp 12A1\nE404",
-            //    Notes = "Giáo viên",
-            //    Location = "Phòng 304"
-            //};
-
-
             // AppointmentCollection.Add(appointment);
+        }
+
+        /// <summary>
+        /// Hiển thị danh sách lịch học
+        /// </summary>
+        private void showSchedules()
+        {
+            for (int i = 0; i < registers.Count; i++)
+            {
+                var register = registers[i];
+
+                // Xác định ngày học đầu tiên trong kỳ
+                var firstLearntDayOfWeek = register.GetFirstDayOfWeek();
+                var learntDayOfWeek = register.GetLearntDayOfWeek();
+                var firstLearntDay = register.begindate;
+                while (firstLearntDayOfWeek != learntDayOfWeek)
+                {
+                    firstLearntDayOfWeek = firstLearntDayOfWeek == DayOfWeek.Saturday ? DayOfWeek.Sunday : (firstLearntDayOfWeek + 1);
+                    firstLearntDay = firstLearntDay.AddDays(+1);
+                }
+
+                for (DateTime dayOfWeek = firstLearntDay; dayOfWeek < register.enddate; dayOfWeek = dayOfWeek.AddDays(7))
+                {
+                    var schedule = new ScheduleAppointment()
+                    {
+                        StartTime = DateTime.Parse(dayOfWeek.ToShortDateString() + " " + register.starttime),
+                        EndTime = DateTime.Parse(dayOfWeek.ToShortDateString() + " " + register.finishtime),
+                        AppointmentBackground = new SolidColorBrush(Color.FromArgb(0xFF, 0xD8, 0x00, 0x73)),
+                        Subject = register.subjectname
+                    };
+                    appointmentCollection.Add(schedule);
+                }
+            }
         }
 
         /// <summary>
