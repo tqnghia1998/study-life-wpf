@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.Classes
 {
-    class CUser
+    public class CUser
     {
         public CUser(string userid, string password, string firstname, string lastname, string email, string faculty, string userType)
         {

@@ -1,4 +1,5 @@
-﻿using Client.HomeWork;
+﻿using Client.Classes;
+using Client.HomeWork;
 using Client.Statistic;
 using Client.SubjectStudent;
 using System;
@@ -23,7 +24,7 @@ namespace Client
     {
         public static string domainURL;
         public static CookieDictionary cookies;
-        public static string userid;
+        public static CUser user;
 
         public MainWindow()
         {

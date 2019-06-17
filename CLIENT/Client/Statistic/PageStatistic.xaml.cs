@@ -51,7 +51,7 @@ namespace Client.Statistic
                     // Lấy JSON các khoa về
                     HttpRequest http = new HttpRequest();
                     http.Cookies = MainWindow.cookies;
-                    string httpResponse = http.Get(MainWindow.domainURL + "/registers/" + MainWindow.userid).ToString();
+                    string httpResponse = http.Get(MainWindow.domainURL + "/registers/" + MainWindow.user.userid).ToString();
 
                     if (httpResponse.Equals("Đã hết phiên hoạt động"))
                     {

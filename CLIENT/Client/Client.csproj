@@ -117,6 +117,7 @@
     <Compile Include="Classes\CRegister.cs" />
     <Compile Include="Classes\CSchedule.cs" />
     <Compile Include="Classes\CSubject.cs" />
+    <Compile Include="Classes\CUser.cs" />
     <Compile Include="HomeWork\PageAddHomework.xaml.cs">
       <DependentUpon>PageAddHomework.xaml</DependentUpon>
     </Compile>
