@@ -53,6 +53,7 @@ namespace Client
                 else
                 {
                     new Dialog(Window.GetWindow(this), "Đăng nhập thành công").ShowDialog();
+                    MessageBox.Show(loginResult.MessageBodyLoaded.ToString());
                     MainWindow.cookies = http.Cookies;
                     Clipboard.SetText(http.Cookies.ToString());
                     NavigationService.Navigate(new Dashboard());

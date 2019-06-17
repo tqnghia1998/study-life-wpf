@@ -2,10 +2,10 @@
 module.exports = function(app) {
     const loginCtrl = require("./controllers/LoginController");
     const facultiesCtrl = require("./controllers/FacultiesController");
-    const productsCtrl = require("./controllers/ProductsController");
     const termsCtrl = require("./controllers/TermsController");
     const subjectsCtrl = require("./controllers/SubjectsController");
     const schedulesCtrl = require("./controllers/SchedulesController");
+    const registersCtrl = require("./controllers/RegistersController");
 
 
     /* LOGIN CONTROLLER */
@@ -50,12 +50,7 @@ module.exports = function(app) {
     .put(schedulesCtrl.update)
     .delete(schedulesCtrl.delete);
 
-    /* PRODUCTS CONTROLLER */
-    app.route("/products")
-    .get(productsCtrl.get)
-    .post(productsCtrl.store)
-    app.route("/products/:productId")
-    .get(productsCtrl.detail)
-    .put(productsCtrl.update)
-    .delete(productsCtrl.delete);
+    /* REGISTERS CONTROLLER */
+    app.route("/registers/:userid")
+    .get(registersCtrl.getByUserId);
 };

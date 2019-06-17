@@ -1,4 +1,5 @@
 ﻿using Client.HomeWork;
+using Client.Statistic;
 using Client.SubjectStudent;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,14 @@ namespace Client
     {
         public static string domainURL;
         public static CookieDictionary cookies;
+        public static string userid;
 
         public MainWindow()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTExNTA5QDMxMzcyZTMxMmUzMFFEcmNlQkZmK2VRRGRvVzR5Nk9yVkd3ZDhwVkRZRTFxVE9PSFBSMDlPWWM9");
             InitializeComponent();
-            _mainFrame.Navigate(new StudentDashboard());
+            //_mainFrame.Navigate(new StudentDashboard());
+            _mainFrame.Navigate(new Login());
             domainURL = "http://localhost:6969";
         }
 

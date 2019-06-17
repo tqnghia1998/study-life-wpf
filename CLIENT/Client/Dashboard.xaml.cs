@@ -1,4 +1,5 @@
 ﻿using Client.Faculty;
+using Client.Statistic;
 using Client.Subject;
 using Client.Term;
 using System;
@@ -91,7 +92,7 @@ namespace Client
             }
             else
             {
-                // Tính năng xem thống kê chưa hoàn thành
+                NavigationService.Navigate(new PageStatistic());
             }
         }
     }
