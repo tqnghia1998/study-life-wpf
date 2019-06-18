@@ -1,0 +1,111 @@
+﻿<Page x:Class="Client.Statistic.PageStatistic"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Schedule;assembly=Syncfusion.SfSchedule.WPF"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="PageStatistic">
+
+    <Grid x:Name="grid1">
+        <Grid.Resources>
+            <Style TargetType="RadioButton" x:Key="RadioButtonStyle">
+                <Setter Property="FontFamily" Value="Sitka Subheading"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CheckStates">
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ColorAnimation Duration="0" To="#303131" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border"/>
+                                                <ColorAnimation Duration="0" To="White" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="text"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unchecked">
+                                            <Storyboard>
+                                                <ColorAnimation Duration="0" To="{TemplateBinding Background}" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border"/>
+                                                <ColorAnimation Duration="0" To="{TemplateBinding Foreground}" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="text"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Indeterminate" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="border" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                                        Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <TextBlock x:Name="text" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!--Backward & Forward-->
+            <Button HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="#303030"
+                    VerticalAlignment="Top"
+                    Height="25" Width="25"
+                    Command="{x:Static NavigationCommands.BrowseBack}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                    <materialDesign:PackIcon Kind="KeyboardArrowLeft" Height="20" Width="20"/>
+            </Button>
+            <Button HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="#303030"
+                    VerticalAlignment="Top"
+                    Height="25" Width="25"
+                    Margin="28,0,0,0"
+                    Command="{x:Static NavigationCommands.BrowseForward}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                    <materialDesign:PackIcon Kind="KeyboardArrowRight" Height="20" Width="20" />   
+            </Button>
+
+            <!--Title-->
+            <Label Content="LỊCH HỌC"
+               Grid.ColumnSpan="2"
+               FontFamily="Sitka Subheading"
+               FontSize="22"
+               Padding="0"
+               FontWeight="Bold"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Center"/>
+
+            <syncfusion:SfSchedule x:Name="Schedule" Grid.Row="1" ShowNonWorkingHours="False" WorkEndHour="20" WorkStartHour="5" IsHighLightWorkingHours="True" 
+                                   ScheduleType="Week" Background="White" TimeInterval="ThirtyMin" IntervalHeight="30" FirstDayOfWeek="Monday" FontWeight="Bold" AppointmentSelectionBrush="Blue"
+                                   AppointmentDragging="Schedule_AppointmentDragging" AppointmentEditorOpening="Schedule_AppointmentEditorOpening" ContextMenuOpening="Schedule_ContextMenuOpening"/>
+
+            <StackPanel  Margin="0 0 0 10" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+                <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="Week" Click="Btn_ScheduleType_Click" Content="Tuần" Width="70" Height="30" FontFamily="Sitka Subheading" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="10 0" IsChecked="True"/>
+                <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="Month" Click="Btn_ScheduleType_Click" Content="Tháng" Width="70" Height="30" FontFamily="Sitka Subheading" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="0 0"/>
+            </StackPanel>
+
+            <!--Progressbar loading-->
+            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2"
+                     Width="25" Height="25"
+                     Style="{StaticResource MaterialDesignCircularProgressBar}"
+                     x:Name="ProgressBar">
+                <ProgressBar.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Value" From="0" To="100" Duration="0:0:1" RepeatBehavior="Forever"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ProgressBar.Triggers>
+            </ProgressBar>
+        </Grid>
+    </Grid>
+</Page>

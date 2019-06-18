@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client.Classes;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -53,6 +55,7 @@ namespace Client
                 else
                 {
                     new Dialog(Window.GetWindow(this), "Đăng nhập thành công").ShowDialog();
+                    MainWindow.user = JsonConvert.DeserializeObject<CUser>(loginResult.ToString());
                     MainWindow.cookies = http.Cookies;
                     Clipboard.SetText(http.Cookies.ToString());
                     NavigationService.Navigate(new StudentDashboard());
