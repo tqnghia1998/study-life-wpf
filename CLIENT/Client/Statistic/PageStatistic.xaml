@@ -82,14 +82,30 @@
                VerticalAlignment="Top"
                HorizontalAlignment="Center"/>
 
-            <syncfusion:SfSchedule  x:Name="Schedule" Grid.Row="1" ShowNonWorkingHours="False" WorkEndHour="20" WorkStartHour="5" IsHighLightWorkingHours="True" 
-                                   ScheduleType="Week" Background="White" TimeInterval="OneHour" IntervalHeight="40"
-                                    AppointmentDragging="Schedule_AppointmentDragging" AppointmentEditorOpening="Schedule_AppointmentEditorOpening" ContextMenuOpening="Schedule_ContextMenuOpening"/>
-            
+            <syncfusion:SfSchedule x:Name="Schedule" Grid.Row="1" ShowNonWorkingHours="False" WorkEndHour="20" WorkStartHour="5" IsHighLightWorkingHours="True" 
+                                   ScheduleType="Week" Background="White" TimeInterval="ThirtyMin" IntervalHeight="30" FirstDayOfWeek="Monday" FontWeight="Bold" AppointmentSelectionBrush="Blue"
+                                   AppointmentDragging="Schedule_AppointmentDragging" AppointmentEditorOpening="Schedule_AppointmentEditorOpening" ContextMenuOpening="Schedule_ContextMenuOpening"/>
+
             <StackPanel  Margin="0 0 0 10" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
                 <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="Week" Click="Btn_ScheduleType_Click" Content="Tuần" Width="70" Height="30" FontFamily="Sitka Subheading" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="10 0" IsChecked="True"/>
-                <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="Month" Click="Btn_ScheduleType_Click" Content="Tháng" Width="70" Height="30" FontFamily="Sitka Subheading" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="10 0"/>
+                <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="Month" Click="Btn_ScheduleType_Click" Content="Tháng" Width="70" Height="30" FontFamily="Sitka Subheading" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="0 0"/>
             </StackPanel>
+
+            <!--Progressbar loading-->
+            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2"
+                     Width="25" Height="25"
+                     Style="{StaticResource MaterialDesignCircularProgressBar}"
+                     x:Name="ProgressBar">
+                <ProgressBar.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Value" From="0" To="100" Duration="0:0:1" RepeatBehavior="Forever"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ProgressBar.Triggers>
+            </ProgressBar>
         </Grid>
     </Grid>
 </Page>

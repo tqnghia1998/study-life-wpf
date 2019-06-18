@@ -1,24 +1,15 @@
 ﻿using Client.Classes;
+using Client.Custom;
 using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
-using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using xNet;
 
 namespace Client.Statistic
@@ -27,6 +18,21 @@ namespace Client.Statistic
     {
         ObservableCollection<CRegister> registers;
         ScheduleAppointmentCollection appointmentCollection = new ScheduleAppointmentCollection();
+        SolidColorBrush[] listColor = new SolidColorBrush[]
+        {
+            new SolidColorBrush(Colors.MediumOrchid),
+            new SolidColorBrush(Colors.ForestGreen),
+            new SolidColorBrush(Colors.DodgerBlue),
+            new SolidColorBrush(Colors.DarkOrange),
+            new SolidColorBrush(Colors.Teal),
+            new SolidColorBrush(Colors.YellowGreen),
+            new SolidColorBrush(Colors.Firebrick),
+            new SolidColorBrush(Colors.MediumBlue),
+            new SolidColorBrush(Colors.SlateGray),
+            new SolidColorBrush(Colors.BlueViolet),
+            new SolidColorBrush(Colors.DarkSlateBlue),
+            new SolidColorBrush(Colors.DeepPink)
+        };
 
         public bool AllowAppointmentDrag { get; set; }
 
@@ -36,7 +42,7 @@ namespace Client.Statistic
             AllowAppointmentDrag = false;
 
             // Display vietnamese language
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("vi-vn");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-vn");
             CultureInfo culture = CultureInfo.CreateSpecificCulture("vi-vn");
             Thread.CurrentThread.CurrentCulture = culture;
 
@@ -70,8 +76,6 @@ namespace Client.Statistic
                 }
                 catch (Exception) { }
             }).Start();
-
-            // AppointmentCollection.Add(appointment);
         }
 
         /// <summary>
@@ -79,9 +83,18 @@ namespace Client.Statistic
         /// </summary>
         private void showSchedules()
         {
+            appointmentCollection.Clear();
+            var listSubject = new List<string>();
             for (int i = 0; i < registers.Count; i++)
             {
+                int colorIndex = -1;
                 var register = registers[i];
+                if (!listSubject.Contains(register.subjectid))
+                {
+                    listSubject.Add(register.subjectid);
+                    colorIndex = (listSubject.Count - 1) % listColor.Length;
+                }
+                else colorIndex = listSubject.FindIndex(x => x.Equals(register.subjectid)) % listColor.Length;
 
                 // Xác định ngày học đầu tiên trong kỳ
                 var firstLearntDayOfWeek = register.GetFirstDayOfWeek();
@@ -93,18 +106,21 @@ namespace Client.Statistic
                     firstLearntDay = firstLearntDay.AddDays(+1);
                 }
 
+                // Đặt lịch học vào ngày đó, và các ngày tiếp theo ở các tuần tiếp theo
                 for (DateTime dayOfWeek = firstLearntDay; dayOfWeek < register.enddate; dayOfWeek = dayOfWeek.AddDays(7))
                 {
                     var schedule = new ScheduleAppointment()
                     {
                         StartTime = DateTime.Parse(dayOfWeek.ToShortDateString() + " " + register.starttime),
                         EndTime = DateTime.Parse(dayOfWeek.ToShortDateString() + " " + register.finishtime),
-                        AppointmentBackground = new SolidColorBrush(Color.FromArgb(0xFF, 0xD8, 0x00, 0x73)),
-                        Subject = register.subjectname
+                        AppointmentBackground = listColor[colorIndex],
+                        Subject = register.subjectname,
+                        Location = i.ToString()
                     };
                     appointmentCollection.Add(schedule);
                 }
             }
+            ProgressBar.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -150,7 +166,12 @@ namespace Client.Statistic
         {
             e.Cancel = true;
             var app = e.Appointment as ScheduleAppointment;
-            new Dialog(Window.GetWindow(this), app.Notes).ShowDialog();
+            int index;
+            if (app.Location == null) return;
+            int.TryParse(app.Location, out index);
+            var infoDialog = new ScheduleInfo(Window.GetWindow(this), registers[index]);
+            infoDialog.RefreshScheduleList += showSchedules;
+            infoDialog.ShowDialog();
         }
     }
 }

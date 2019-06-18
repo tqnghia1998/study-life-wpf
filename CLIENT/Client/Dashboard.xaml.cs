@@ -1,4 +1,5 @@
 ﻿using Client.Faculty;
+using Client.HomeWork;
 using Client.Statistic;
 using Client.Subject;
 using Client.Term;

@@ -3,7 +3,7 @@ const db = require("./../db");
 
 module.exports = {
     get: function(req, res) {
-        if (req.isAuthenticated()) {
+        if (true) {
             const sqlQuery = "SELECT * FROM faculties";
             db.query(sqlQuery, function(err, response){
                 res.send(err ? "Không thể kết nối đến dữ liệu" : response);

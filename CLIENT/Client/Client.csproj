@@ -118,6 +118,9 @@
     <Compile Include="Classes\CSchedule.cs" />
     <Compile Include="Classes\CSubject.cs" />
     <Compile Include="Classes\CUser.cs" />
+    <Compile Include="Custom\ScheduleInfo.xaml.cs">
+      <DependentUpon>ScheduleInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HomeWork\PageAddHomework.xaml.cs">
       <DependentUpon>PageAddHomework.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
     <Page Include="Custom\Dialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\ScheduleInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>

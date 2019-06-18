@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.Classes
 {
-    class CRegister
+    public class CRegister
     {
         public CRegister(string userid, string status, string subjectid, string subjectname, string credit, string teachername, string termindex, string termyear, string faculty, string day, string room, string starttime, string finishtime, string facultyname, DateTime begindate, DateTime enddate)
         {

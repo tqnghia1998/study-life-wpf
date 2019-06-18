@@ -19,5 +19,18 @@ module.exports = {
         else {
             res.json("Đã hết phiên hoạt động");
         }
+    },
+    deregisterByUserId: function(req, res) {
+        if (req.isAuthenticated()) {
+            const sqlQuery = "DELETE FROM registers WHERE userid = ? AND subjectid = ?";
+            let userid = req.params.userid;
+            let subjectid = req.params.subjectid;
+            db.query(sqlQuery, [userid, subjectid], function(err, response){
+                res.send(err ? "Không thể kết nối đến dữ liệu" : "Hủy đăng ký thành công");
+            });
+        }
+        else {
+            res.json("Đã hết phiên hoạt động");
+        }
     }
 }

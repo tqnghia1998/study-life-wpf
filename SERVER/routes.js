@@ -53,4 +53,6 @@ module.exports = function(app) {
     /* REGISTERS CONTROLLER */
     app.route("/registers/:userid")
     .get(registersCtrl.getByUserId);
+    app.route("/registers/:userid/:subjectid")
+    .delete(registersCtrl.deregisterByUserId)
 };
