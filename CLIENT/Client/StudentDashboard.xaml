@@ -47,7 +47,7 @@
         </Button>
 
         <!--Đăng ký học phần-->
-        <Border Name="manageFaculty" Margin="0,0,0,0">
+        <Border Name="manageSubject" Margin="0,0,0,0">
             <Border.Effect>
                 <DropShadowEffect
                     Color="DarkGray"
@@ -56,15 +56,17 @@
                     BlurRadius="20"/>
             </Border.Effect>
             <Image Grid.Row="0"
-               Tag="imgManageFaculty"
-               Source="Images/ApplySubject.png"
-              
+                Tag="imgManageSubject"
+                Source="Images/ApplySubject.png"
+                MouseUp="Image_MouseUp"
+               MouseMove="img_MouseMove"
+               MouseLeave="img_MouseLeave"
                >
             </Image>
         </Border>
 
-        <!--Quản lý môn học-->
-        <Border Name="manageSubject" Grid.Column="1" Margin="72,0,50,0">
+        <!--Quản lý bài tập-->
+        <Border Name="manageHomework" Grid.Column="1" Margin="72,0,50,0">
             <Border.Effect>
                 <DropShadowEffect
                     Color="DarkGray"
@@ -73,14 +75,17 @@
                     BlurRadius="20"/>
             </Border.Effect>
             <Image Grid.Row="0"
-               Tag="imgManageSubject"
+               Tag="imgManageHomework"
                Source="Images/ManageWork.png"
+               MouseUp="Image_MouseUp"
+               MouseMove="img_MouseMove"
+               MouseLeave="img_MouseLeave"
                >
             </Image>
         </Border>
 
-        <!--Quản lý học kỳ-->
-        <Border Name="manageTerm" Grid.Row="1" Margin="0,0,0,0">
+        <!--Quản lý lịch học-->
+        <Border Name="manageSchedule" Grid.Row="1" Margin="0,0,0,0">
             <Border.Effect>
                 <DropShadowEffect
                     Color="DarkGray"
@@ -89,8 +94,11 @@
                     BlurRadius="20"/>
             </Border.Effect>
             <Image Grid.Row="0"
-               Tag="imgManageTerm"
+               Tag="imgManageSchedule"
                Source="Images/Schedule.png"
+               MouseUp="Image_MouseUp"
+               MouseMove="img_MouseMove"
+               MouseLeave="img_MouseLeave"
                    >
             </Image>
         </Border>

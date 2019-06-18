@@ -6,8 +6,8 @@ module.exports = function(app) {
     const termsCtrl = require("./controllers/TermsController");
     const subjectsCtrl = require("./controllers/SubjectsController");
     const schedulesCtrl = require("./controllers/SchedulesController");
-
-
+    const tasksCtrl = require("./controllers/TaskController");
+    const registerCtrl = require("./controllers/RegisterController");
     /* LOGIN CONTROLLER */
     app.route("/login")
     .post(loginCtrl.login);
@@ -39,7 +39,7 @@ module.exports = function(app) {
     .get(subjectsCtrl.get)
     .post(subjectsCtrl.post);
     app.route("/subjects/:subjectid")
-    .put(subjectsCtrl.update);
+    .put(subjectsCtrl.update)
     
     /* SCHEDULE CONTROLLER */
     app.route("/schedules/:subjectid")
@@ -58,4 +58,22 @@ module.exports = function(app) {
     .get(productsCtrl.detail)
     .put(productsCtrl.update)
     .delete(productsCtrl.delete);
+
+    // TASKS CONTROLLER
+    app.route("/tasks")
+    .get(tasksCtrl.get)
+    .post(tasksCtrl.post)
+    app.route("/tasks/:taskid")
+    .put(tasksCtrl.update)
+    
+    // REGISTER CONTROLLER
+    app.route("/register")
+    .get(registerCtrl.termyear)
+    .post(registerCtrl.post)
+    app.route("/register/:termyear")
+    .get(registerCtrl.termindex)
+    app.route("/register/:termyear/:termindex")
+    .get(registerCtrl.subject)
+    app.route("/registed")
+    .get(registerCtrl.registed)
 };

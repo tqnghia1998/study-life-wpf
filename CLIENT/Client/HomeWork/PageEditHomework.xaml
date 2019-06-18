@@ -7,7 +7,6 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Client.HomeWork"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1000"
       Title="PageEditHomework">
 
     <Grid>
@@ -16,7 +15,8 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -41,7 +41,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="0,18,18,18">Tên bài tập</Label>
+            VerticalAlignment="Center" Margin="0,18,18,18">Mã bài tập</Label>
 
         <Label
             Grid.Row="2"
@@ -49,7 +49,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top" Margin="0,22,18,0">Môn học</Label>
+            VerticalAlignment="Center" Margin="0,18,18,18">Tên bài tập</Label>
 
         <Label
             Grid.Row="3"
@@ -57,7 +57,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="0,24,18,12">Hạn chót</Label>
+            VerticalAlignment="Top" Margin="0,22,18,0">Môn học</Label>
 
         <Label
             Grid.Row="4"
@@ -65,10 +65,18 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top" Margin="0,22,18,0">Mô tả</Label>
+            VerticalAlignment="Center" Margin="0,24,18,12">Hạn chót</Label>
 
         <Label
             Grid.Row="5"
+            FontFamily="Sitka Subheading"
+            FontSize="20"
+            Padding="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top" Margin="0,22,18,0">Mô tả</Label>
+
+        <Label
+            Grid.Row="6"
             FontFamily="Sitka Subheading"
             FontSize="20"
             Padding="0"
@@ -80,7 +88,8 @@
             FontSize="20"
             Background="Transparent"
             FontFamily="Sitka Subheading"
-
+            Name="taskid"
+            Text="{Binding taskid}"
             VerticalAlignment="Center"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,1,0,13"
             />
@@ -91,43 +100,81 @@
             FontSize="20"
             Background="Transparent"
             FontFamily="Sitka Subheading"
-
+            Name="taskname"
+            Text="{Binding taskname}"
             VerticalAlignment="Center"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,1,0,13"
             />
 
-        <DatePicker
+        <ComboBox
             Grid.Column="1"
             Grid.Row="3"
             FontSize="20"
             Background="Transparent"
             FontFamily="Sitka Subheading"
+            Name="subjectname"
+            ItemsSource="{Binding LongListToTestComboVirtualization}"
+            DisplayMemberPath="subjectname"
+            DropDownOpened="Combobox_DropDownOpened"
+            DropDownClosed="Combobox_DropDownClosed"
+            >
+
+        </ComboBox>
+
+        <DatePicker
+            Grid.Column="1"
+            Grid.Row="4"
+            FontSize="20"
+            Background="Transparent"
+            FontFamily="Sitka Subheading"
+            Name="deadline"
+            SelectedDate="{Binding deadline}"
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
 
         <TextBox
             Grid.Column="1"
-            Grid.Row="4"
+            Grid.Row="5"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
             AcceptsReturn="True"
             TextWrapping="Wrap"
             Margin="0,5,0,0"
             FontSize="20"
+            Name="description"
+            Text="{Binding description}"
             materialDesign:HintAssist.IsFloating="False"
             FontFamily="Sitka Subheading"
             VerticalScrollBarVisibility="Auto"/>
-
-        <Slider
-            Grid.Column="1"
-            Grid.Row="5"
-            Minimum="0"
-            Maximum="100"
-            Style="{StaticResource MaterialDesignDiscreteSlider}"
-            Value="{Binding process}"
-            Width="Auto"/>
-
         <Grid
             Grid.Column="1"
-            Grid.Row="6"
+            Grid.Row="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <Slider
+                    VerticalAlignment="Center"
+                    Minimum="0"
+                    Maximum="100"
+                    Grid.Column="0"
+                    Name="progress"
+                    Value="{Binding progress}"
+                    Width="Auto"/>
+
+                <Label
+            Grid.Column="1"
+            FontFamily="Sitka Subheading"
+            FontSize="20"
+            Padding="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center" >40%</Label>
+
+            </Grid>
+        </Grid>
+        <Grid
+            Grid.Column="1"
+            Grid.Row="7"
             Margin="10,10,10,0" Height="60" VerticalAlignment="Top">
 
             <Grid.ColumnDefinitions>
@@ -143,18 +190,21 @@
                 Background="Silver"
                 Foreground="Black"
                 BorderBrush="Silver"
-                VerticalAlignment="Stretch" Height="Auto">
+                VerticalAlignment="Stretch" 
+                Height="Auto"
+                Name="updateTask"
+                Click="UpdateTask_Click">
                 Cập nhật
             </Button>
 
             <Button
                 Grid.Column="3"
                 Margin="10,10,10,10"
-                
+                Name="cancelUpdateTask"            
                 Background="Silver"
                 Foreground="Black"
                 BorderBrush="Silver"
-                VerticalAlignment="Stretch" Height="Auto">
+                VerticalAlignment="Stretch" Height="Auto" Click="CancelUpdateTask_Click">
                 Huỷ bỏ
             </Button>
         </Grid>

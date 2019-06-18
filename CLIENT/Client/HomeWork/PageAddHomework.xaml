@@ -5,17 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Client.HomeWork"
-      Width="1000" Height="600" 
+      
       mc:Ignorable="d" 
       Title="PageAddHomework">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -37,88 +38,104 @@
 
         <Label
             Grid.Row="1"
-            Margin="0,28,10,16"
             FontFamily="Sitka Subheading"
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center">Tên bài tập</Label>
+            VerticalAlignment="Center" Margin="-3,18,8,18">Mã bài tập</Label>
 
         <Label
             Grid.Row="2"
-            Margin="0,28,10,16"
             FontFamily="Sitka Subheading"
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center">Môn học</Label>
+            VerticalAlignment="Center" Margin="-8,18,8,18">Tên bài tập</Label>
 
         <Label
             Grid.Row="3"
-            Margin="0,28,10,16"
             FontFamily="Sitka Subheading"
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center">Hạn chót</Label>
+            VerticalAlignment="Center" Margin="0,18,8,18">Môn học</Label>
 
         <Label
             Grid.Row="4"
-            Margin="0,26,10,0"
             FontFamily="Sitka Subheading"
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top">Mô tả</Label>
+            VerticalAlignment="Center" Margin="0,18,8,18">Hạn chót</Label>
+
+        <Label
+            Grid.Row="5"
+            FontFamily="Sitka Subheading"
+            FontSize="20"
+            Padding="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top" Margin="0,20,8,0">Mô tả</Label>
 
         <TextBox
             Grid.Column="1"
             Grid.Row="1"
-            Margin="10,10,10,10"
             FontSize="20"
             Background="Transparent"
             FontFamily="Sitka Subheading"
-
+            Name="taskid"
             VerticalAlignment="Center"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,1,10,13" 
             />
 
         <TextBox
             Grid.Column="1"
             Grid.Row="2"
-            Margin="10"
             FontSize="20"
             Background="Transparent"
             FontFamily="Sitka Subheading"
-
+            Name="taskname"
             VerticalAlignment="Center"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,1,10,13" 
             />
 
-        <DatePicker
+        <ComboBox
+             Margin="10,1,10,0"
             Grid.Column="1"
             Grid.Row="3"
             FontSize="20"
-            Margin="10"
             Background="Transparent"
             FontFamily="Sitka Subheading"
-            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            Name="subjectname"
+            ItemsSource="{Binding LongListToTestComboVirtualization}"
+            DisplayMemberPath="subjectname"
+            DropDownOpened="Combobox_DropDownOpened"
+            DropDownClosed="Combobox_DropDownClosed"
+            ></ComboBox>
+
+        <DatePicker
+            Grid.Column="1"
+            Grid.Row="4"
+            FontSize="20"
+            Background="Transparent"
+            FontFamily="Sitka Subheading"
+            Name="deadline"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="10,1,10,13"  />
 
         <TextBox
             Grid.Column="1"
-            Grid.Row="4"
+            Grid.Row="5"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-            Margin="10"
+            Name="description"
             AcceptsReturn="True"
             TextWrapping="Wrap"
             FontSize="20"
             materialDesign:HintAssist.IsFloating="False"
             FontFamily="Sitka Subheading"
-            VerticalScrollBarVisibility="Auto"/>
+            VerticalScrollBarVisibility="Auto" Margin="10,0,10,6" />
 
         <Grid
             Grid.Column="1"
-            Grid.Row="5"
+            Grid.Row="6"
             Margin="10,10,10,0" Height="60" VerticalAlignment="Top">
 
             <Grid.ColumnDefinitions>
@@ -134,18 +151,24 @@
                 Background="Silver"
                 Foreground="Black"
                 BorderBrush="Silver"
-                VerticalAlignment="Stretch" Height="Auto">
+                VerticalAlignment="Stretch" 
+                Height="Auto"
+                Name="addTask"
+                Click="AddTask_Click">
                 Thêm bài tập
             </Button>
 
             <Button
+                Name="cancelAddTask"
                 Grid.Column="3"
                 Margin="10,10,10,10"
                 
                 Background="Silver"
                 Foreground="Black"
                 BorderBrush="Silver"
-                VerticalAlignment="Stretch" Height="Auto">
+                VerticalAlignment="Stretch" 
+                Height="Auto"
+                Click="CancelAddTask_Click">
                 Huỷ bỏ
             </Button>
         </Grid>

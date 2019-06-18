@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client.HomeWork;
+using Client.SubjectStudent;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,73 +28,69 @@ namespace Client
             InitializeComponent();
         }
 
-        //#region Xử lý hiệu ứng
-        ///// <summary>
-        ///// Hiệu ứng khi rê chuột vào hình
-        ///// </summary>
-        //private void img_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    DropShadowEffect effect = new DropShadowEffect()
-        //    {
-        //        Color = Colors.DarkGray,
-        //        Direction = 270,
-        //        BlurRadius = 20,
-        //        ShadowDepth = 10
-        //    };
+        #region Xử lý hiệu ứng
+        /// <summary>
+        /// Hiệu ứng khi rê chuột vào hình
+        /// </summary>
+        private void img_MouseMove(object sender, MouseEventArgs e)
+        {
+            DropShadowEffect effect = new DropShadowEffect()
+            {
+                Color = Colors.DarkGray,
+                Direction = 270,
+                BlurRadius = 20,
+                ShadowDepth = 10
+            };
 
-        //    Image img = sender as Image;
-        //    if (img.Tag.Equals("imgManageFaculty"))
-        //        manageFaculty.Effect = effect;
-        //    else if (img.Tag.Equals("imgManageSubject"))
-        //        manageSubject.Effect = effect;
-        //    else if (img.Tag.Equals("imgManageTerm"))
-        //        manageTerm.Effect = effect;
-        //    else manageStatistic.Effect = effect;
-        //}
+            Image img = sender as Image;
+            if (img.Tag.Equals("imgManageHomework"))
+                manageHomework.Effect = effect;
+            else if (img.Tag.Equals("imgManageSubject"))
+                manageSubject.Effect = effect;
+            else if (img.Tag.Equals("imgManageSchedule"))
+                manageSchedule.Effect = effect;
+        }
 
-        ///// <summary>
-        ///// Hiệu ứng khi ra chuột ra khỏi hình
-        ///// </summary>
-        //private void img_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    DropShadowEffect effect = new DropShadowEffect()
-        //    {
-        //        Color = Colors.DarkGray,
-        //        Direction = 270,
-        //        BlurRadius = 20,
-        //        ShadowDepth = 5
-        //    };
+        /// <summary>
+        /// Hiệu ứng khi ra chuột ra khỏi hình
+        /// </summary>
+        private void img_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DropShadowEffect effect = new DropShadowEffect()
+            {
+                Color = Colors.DarkGray,
+                Direction = 270,
+                BlurRadius = 20,
+                ShadowDepth = 5
+            };
 
-        //    Image img = sender as Image;
-        //    if (img.Tag.Equals("imgManageFaculty"))
-        //        manageFaculty.Effect = effect;
-        //    else if (img.Tag.Equals("imgManageSubject"))
-        //        manageSubject.Effect = effect;
-        //    else if (img.Tag.Equals("imgManageTerm"))
-        //        manageTerm.Effect = effect;
-        //    else manageStatistic.Effect = effect;
-        //}
-        //#endregion
+            Image img = sender as Image;
+            if (img.Tag.Equals("imgManageHomework"))
+                manageHomework.Effect = effect;
+            else if (img.Tag.Equals("imgManageSubject"))
+                manageSubject.Effect = effect;
+            else if (img.Tag.Equals("imgManageSchedule"))
+                manageSchedule.Effect = effect;
+        }
+        #endregion
 
-        //private void Image_MouseUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    Image img = sender as Image;
-        //    if (img.Tag.Equals("imgManageFaculty"))
-        //    {
-        //        //NavigationService.Navigate(new PageFaculty());
-        //    }
-        //    else if (img.Tag.Equals("imgManageSubject"))
-        //    {
-        //        //NavigationService.Navigate(new PageSubject());
-        //    }
-        //    else if (img.Tag.Equals("imgManageTerm"))
-        //    {
-        //        //NavigationService.Navigate(new PageTerm());
-        //    }
-        //    else
-        //    {
-        //        // Tính năng xem thống kê chưa hoàn thành
-        //    }
-        //}
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Image img = sender as Image;
+            if (img.Tag.Equals("imgManageHomework"))
+            { 
+                NavigationService.Navigate(new PageHomework());
+            }
+            else if (img.Tag.Equals("imgManageSubject"))
+            {
+                NavigationService.Navigate(new PageApplySubject());
+            }
+            else if (img.Tag.Equals("imgManageSchedule"))
+            {
+                //MessageBox.Show("imgManageSchedule");
+                //NavigationService.Navigate(new PageTerm());
+            }
+            
+        }
     }
 }

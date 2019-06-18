@@ -6,14 +6,14 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Client.HomeWork"
       mc:Ignorable="d" 
-      Height="600" Width="1000"
+      d:DesignHeight="600" d:DesignWidth="1000"
       Title="PageHomework">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -62,13 +62,16 @@
 
         <!--Thêm bài tập-->
         <Button
+            Name="addTask"
             Background="Silver"
             Height="40"
             Grid.Column="2"
             Margin="160,0,40,0"
             Foreground="Black"
             FontFamily="Sitka Subheading"
-            FontWeight="Bold">
+            FontWeight="Bold"
+            Click="AddTask_Click">
+            
             Thêm bài tập</Button>
 
         <!--Search-->
@@ -84,10 +87,10 @@
                  FontSize="16"
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
-
+                TextChanged="SearchKey_TextChanged"
                  VerticalAlignment="Center"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 x:Name="editSubjectId"/>
+                 x:Name="searchKey"/>
             <Button 
                 Grid.Column="1"
                 BorderBrush="Transparent" 
@@ -125,6 +128,11 @@
                 Background="Transparent"
                 FontWeight="Bold"
                 VerticalAlignment="Center"
+                Name="subjectname"
+                DropDownOpened="Combobox_DropDownOpened"
+                DropDownClosed="Combobox_DropDownClosed"
+                DisplayMemberPath="subjectname"
+                SelectionChanged="Subjectname_SelectionChanged"
                 ItemsSource="{Binding LongListToTestComboVirtualization}"
                 />
 
@@ -152,24 +160,26 @@
         </Grid>
 
         <!--Danh sách bài tập-->
-        <ListView
+        <!--<ListView
             Grid.Row="2" 
             Grid.ColumnSpan="3" 
-            x:Name="spListHomeWork" 
-            Margin="0,0,30,50"
-            HorizontalAlignment="Stretch"
+            x:Name="spListTask" 
+            Margin="0,0,0,0"
             ScrollViewer.CanContentScroll="False"
-            ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            HorizontalContentAlignment="Stretch"
+            SelectionChanged="SpListTask_SelectionChanged"
+            >
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="SpListTask_PreviewMouseLeftButtonDown" />
                 </Style>
             </ListView.ItemContainerStyle>
-            
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="950">
+                    <Grid>
                         <Expander
                             Margin="0"
                             Background="Transparent" 
@@ -182,72 +192,188 @@
                             <Expander.HeaderTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock FontSize="20" Text="{Binding homeworkname}" />
+                                        <TextBlock FontSize="16">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Tên bài tập: {0} - {1}">
+                                                    <Binding Path="subjectname" />
+                                                    <Binding Path="subjectid" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </Expander.HeaderTemplate>
 
-                            <StackPanel Background="Transparent" Orientation="Vertical" >
+                            <StackPanel Background="Transparent" Orientation="Vertical">
 
                                 <TextBlock
                                     FontFamily="Sitka Subheading"
-                                    Margin="50,5,0,0"
+                                    Margin="50,0,0,0"
                                     FontSize="14"
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="{Binding subjectname}"></TextBlock>
+                                    Text="{Binding credit, StringFormat=Số tín chỉ: {0}}"></TextBlock>
+
 
                                 <TextBlock
                                     FontFamily="Sitka Subheading"
-                                    Margin="50,5,0,0"
+                                    Margin="50,0,0,0"
                                     FontSize="14"
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="{Binding deadline}"></TextBlock>
+                                    Text="{Binding teachername, StringFormat=Giảng viên: {0}}"></TextBlock>
 
                                 <TextBlock
                                     FontFamily="Sitka Subheading"
-                                    Margin="50,5,0,0"
+                                    Margin="50,0,0,0"
                                     FontSize="14"
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="{Binding description}"></TextBlock>
+                                    Text="{Binding faculty, StringFormat=Khoa: {0}}"></TextBlock>
 
                                 <TextBlock
                                     FontFamily="Sitka Subheading"
-                                    Margin="50,5,0,0"
+                                    Margin="50,0,0,0"
                                     FontSize="14"
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="Tiến độ: "></TextBlock>
+                                    Text="{Binding begindate, StringFormat=Ngày bắt đầu: {0}}"></TextBlock>
 
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding enddate, StringFormat=Ngày kết thúc: {0}}"></TextBlock>
 
-                                <Slider
-                                    Minimum="0"
-                                    Maximum="100"
-                                    Style="{StaticResource MaterialDesignDiscreteSlider}"
-                                    Value="{Binding process}"
-                                    Width="400"/>
-
-                                <StackPanel HorizontalAlignment="Right" Margin="0,20,50,0" Orientation="Horizontal">
-                                    <Button Margin="0,0,10,0" Background="Silver" Foreground="Black" BorderBrush="Transparent"  Width="150" Height="40" >Chỉnh sửa</Button>
-                                    <Button Background="Silver" Foreground="Black" BorderBrush="Transparent"  Width="150" Height="40" >Xoá bài tập</Button>
-                                </StackPanel>
+                                <Button Background="Silver" Foreground="Black" BorderBrush="Transparent" Margin="0,0,40,0" Width="150" Height="40" HorizontalAlignment="Right">Đăng ký</Button>
 
                             </StackPanel>
 
-                        
-                    </Expander>
+
+                        </Expander>
                     </Grid>
 
                 </DataTemplate>
 
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
+
+        <!--DataGrid danh sách sản phẩm-->
+        <DataGrid ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+               FontFamily="Sitka Subheading"
+                Background="Transparent" 
+                AutoGenerateColumns="False"  
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                CanUserReorderColumns="False" 
+                Grid.Row="2" 
+                Grid.ColumnSpan="3" 
+                  FontSize="14"
+                  IsReadOnly="True"
+                x:Name="spListTask"
+                SelectionMode="Single"
+                 >
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDownProduct"></EventSetter>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <!--<DataGridTemplateColumn Header="Tên bài tập" Width="200">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ProductSource}" Height="150"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+
+                <DataGridTextColumn       
+                        Header="Tên bài tập"
+                        Binding="{Binding Path=taskname}"
+                        Width="2*">
+                </DataGridTextColumn>
+
+                <DataGridTextColumn 
+                        Header="Môn"
+                        Width="2*"
+                        Binding="{Binding Path=subjectname}">
+                </DataGridTextColumn>
+
+                <DataGridTextColumn 
+                        Header="Hạn chót"
+                        Width="1*"
+                        Binding="{Binding Path=deadline}">
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Width="3*" Header="Tiến độ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Slider
+                                    Name="progressSlider"
+                                    Minimum="0"
+                                    Maximum="100"
+                                    Value="{Binding progress}"
+                                    Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                    Margin="10,0,10,0"
+                                    Width="300"
+                                    ValueChanged="ProgressSlider_ValueChanged"
+                                 />
+                            </StackPanel>
+                            
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Width="1*">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+                                <Button Width="45" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="Black" Margin="0,0,2,0" Name="editTask" Click="EditTask_Click">
+                                    <materialDesign:PackIcon Kind="Edit" />
+                                </Button>
+
+                                <Button Width="45" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="Black" >
+                                    <materialDesign:PackIcon Kind="Close" />
+                                </Button>
+
+                                <!--<Button Width="20" Height="20" Background="Transparent"  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Click="DeleteProductButton_Click" Margin="40,0,0,0">
+                                    <materialDesign:PackIcon Foreground="IndianRed" Kind="Close" Height="15" Width="15"/>
+                                </Button>-->
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Page>

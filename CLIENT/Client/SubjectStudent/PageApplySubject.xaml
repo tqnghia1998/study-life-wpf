@@ -11,7 +11,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -69,25 +70,85 @@
                 FontWeight="Bold"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right">Số tín chỉ: 10/22</Label>
-        
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Năm học-->
+            <Label
+                Grid.Column="0"
+                FontFamily="Sitka Subheading"
+                FontSize="16"
+                Margin="18,18,18,19"
+                Padding="0"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">Năm học</Label>
+            <ComboBox 
+                Name="termyear"
+                Grid.Column="1"
+                Margin="0,0,15,0"
+                FontSize="16"
+                FontFamily="Sitka Subheading"
+                Background="Transparent"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                DisplayMemberPath="termyear"
+                ItemsSource="{Binding LongListToTestComboVirtualization}"
+                SelectionChanged="Termyear_SelectionChanged"
+                DropDownOpened="Combobox_DropDownOpened"
+                DropDownClosed="Combobox_DropDownClosed"
+                />
+
+            <!--Học kì-->
+            <Label
+                Grid.Column="2"
+                FontFamily="Sitka Subheading"
+                FontSize="16"
+                Margin="18,18,18,19"
+                Padding="0"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">Học kỳ</Label>
+            <ComboBox 
+                Name="termindex"
+                Grid.Column="3"
+                Margin="0,0,15,0"
+                FontSize="16"
+                FontFamily="Sitka Subheading"
+                Background="Transparent"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                DisplayMemberPath="termindex"
+                ItemsSource="{Binding LongListToTestComboVirtualization}"
+                SelectionChanged="Termindex_SelectionChanged"
+                DropDownOpened="Combobox_DropDownOpened"
+                DropDownClosed="Combobox_DropDownClosed"
+                />
+
+        </Grid>
+
         <!--Search-->
         <Grid 
-            Grid.Row="1">
+            Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
             <TextBox
                 Grid.Column="0"
-                 Margin="15,9,15,19"
-                 materialDesign:HintAssist.Hint="Tìm kiếm theo tên/mã môn học"
+                 materialDesign:HintAssist.Hint="Tìm kiếm tên/mã môn"
                  FontSize="16"
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
-
                  VerticalAlignment="Center"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 x:Name="editSubjectId"/>
+                 x:Name="editSubjectId" Margin="18,2,0,18"/>
             <Button 
                 Grid.Column="1"
                 BorderBrush="Transparent" 
@@ -98,7 +159,7 @@
         </Grid>
 
         <!--Lọc-->
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
@@ -125,6 +186,8 @@
                 FontWeight="Bold"
                 VerticalAlignment="Center"
                 ItemsSource="{Binding LongListToTestComboVirtualization}"
+                DropDownOpened="Combobox_DropDownOpened"
+                DropDownClosed="Combobox_DropDownClosed"
                 />
 
             <Label
@@ -147,20 +210,22 @@
                 FontWeight="Bold"
                 VerticalAlignment="Center"
                 ItemsSource="{Binding LongListToTestComboVirtualization}"
-                Name="editTermYear"/>
+                Name="typeList"
+                SelectionChanged="TypeList_SelectionChanged">
+                <ComboBoxItem>Chưa đăng ký</ComboBoxItem>
+                <ComboBoxItem>Đã đăng ký</ComboBoxItem>
+            </ComboBox>
         </Grid>
 
-        <!--Danh sách học phần-->
         <ListView
-            Grid.Row="2" 
+            Grid.Row="3" 
             Grid.ColumnSpan="3" 
             x:Name="spListSubject" 
-            Margin="0,0,20,0"
-            HorizontalAlignment="Stretch"
-            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            Margin="0,0,0,0"
+            ScrollViewer.CanContentScroll="False"
             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-            
-            ScrollViewer.CanContentScroll="False">
+            HorizontalContentAlignment="Stretch"
+            >
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -170,7 +235,7 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="950">
+                    <Grid>
                         <Expander
                             Margin="0"
                             Background="Transparent" 
@@ -183,7 +248,14 @@
                             <Expander.HeaderTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock FontSize="20" Text="{Binding subjectname}" />
+                                        <TextBlock FontSize="16">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Tên môn học: {0} - {1}">
+                                                    <Binding Path="subjectname" />
+                                                    <Binding Path="subjectid" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </Expander.HeaderTemplate>
@@ -197,7 +269,8 @@
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="{Binding subjectid}"></TextBlock>
+                                    Text="{Binding credit, StringFormat=Số tín chỉ: {0}}"></TextBlock>
+
 
                                 <TextBlock
                                     FontFamily="Sitka Subheading"
@@ -206,7 +279,7 @@
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="{Binding credit}"></TextBlock>
+                                    Text="{Binding teachername, StringFormat=Giảng viên: {0}}"></TextBlock>
 
                                 <TextBlock
                                     FontFamily="Sitka Subheading"
@@ -215,7 +288,7 @@
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="{Binding teachername}"></TextBlock>
+                                    Text="{Binding faculty, StringFormat=Khoa: {0}}"></TextBlock>
 
                                 <TextBlock
                                     FontFamily="Sitka Subheading"
@@ -224,8 +297,8 @@
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="{Binding termindex}"></TextBlock>
-                                
+                                    Text="{Binding begindate, StringFormat=Ngày bắt đầu: {0}}"></TextBlock>
+
                                 <TextBlock
                                     FontFamily="Sitka Subheading"
                                     Margin="50,0,0,0"
@@ -233,20 +306,10 @@
                                     Padding="0"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    Text="{Binding termyear}"></TextBlock>
-                                
-                                <TextBlock
-                                    FontFamily="Sitka Subheading"
-                                    Margin="50,0,0,0"
-                                    FontSize="14"
-                                    Padding="0"
-                                    FontWeight="Bold"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding faculty}"></TextBlock>  
-                                
-                                
-                                    <Button Background="Silver" Foreground="Black" BorderBrush="Transparent" Margin="0,0,40,0" Width="150" Height="40" HorizontalAlignment="Right">Đăng ký</Button>
-                                
+                                    Text="{Binding enddate, StringFormat=Ngày kết thúc: {0}}"></TextBlock>
+
+                                <Button Background="Silver" Foreground="Black" BorderBrush="Transparent" Margin="0,0,40,0" Width="150" Height="40" HorizontalAlignment="Right" Name="registsubject" Click="Registsubject_Click">Đăng ký</Button>
+
                             </StackPanel>
 
 
@@ -258,5 +321,235 @@
             </ListView.ItemTemplate>
         </ListView>
 
+
+        <ListView
+            Grid.Row="3" 
+            Grid.ColumnSpan="3" 
+            x:Name="spListRegisted" 
+            Margin="0,0,0,0"
+            Visibility="Hidden"
+            ScrollViewer.CanContentScroll="False"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            HorizontalContentAlignment="Stretch"
+            >
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Expander
+                            Margin="0"
+                            Background="Transparent" 
+                            x:Name="expander1" 
+                            HorizontalAlignment="Stretch" 
+                            Header="{Binding}"  
+                            IsExpanded="False"
+                            FontFamily="Sitka Subheading">
+
+                            <Expander.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="16">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Tên môn học: {0} - {1}">
+                                                    <Binding Path="subjectname" />
+                                                    <Binding Path="subjectid" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Expander.HeaderTemplate>
+
+                            <StackPanel Background="Transparent" Orientation="Vertical">
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding credit, StringFormat=Số tín chỉ: {0}}"></TextBlock>
+
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding teachername, StringFormat=Giảng viên: {0}}"></TextBlock>
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding faculty, StringFormat=Khoa: {0}}"></TextBlock>
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding begindate, StringFormat=Ngày bắt đầu: {0}}"></TextBlock>
+
+                                <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding enddate, StringFormat=Ngày kết thúc: {0}}"></TextBlock>
+
+                                <Button Background="Silver" Foreground="Black" BorderBrush="Transparent" Margin="0,0,40,0" Width="150" Height="40" HorizontalAlignment="Right" Name="registsubject" Click="Registsubject_Click">Đăng ký</Button>
+
+                            </StackPanel>
+
+
+                        </Expander>
+                    </Grid>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <!--Danh sách học phần-->
+        <!--<DataGrid
+            Grid.Row="3" 
+            Grid.ColumnSpan="3" 
+            x:Name="spListSubject" 
+            HorizontalAlignment="Stretch"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            Background="Transparent"
+            HeadersVisibility="None"
+            ScrollViewer.CanContentScroll="False" 
+            ItemsSource="{Binding}">
+
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDownProduct"></EventSetter>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGridTemplateColumn Width="1*" Header="Tiến độ">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid Width="950">
+                            <Expander
+                            Margin="0"
+                            Background="Transparent" 
+                            x:Name="expander1" 
+                            HorizontalAlignment="Stretch" 
+                            Header="{Binding}"  
+                            IsExpanded="False"
+                            FontFamily="Sitka Subheading">
+
+                                <Expander.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="16">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="Tên bài tập: {0} - {1}">
+                                                        <Binding Path="subjectname" />
+                                                        <Binding Path="subjectid" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </Expander.HeaderTemplate>
+
+                                <StackPanel Background="Transparent" Orientation="Vertical">
+
+                                    <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding credit, StringFormat=Số tín chỉ: {0}}"></TextBlock>
+
+
+                                    <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding teachername, StringFormat=Giảng viên: {0}}"></TextBlock>
+
+                                    <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding faculty, StringFormat=Khoa: {0}}"></TextBlock>
+
+                                    <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding begindate, StringFormat=Ngày bắt đầu: {0}}"></TextBlock>
+
+                                    <TextBlock
+                                    FontFamily="Sitka Subheading"
+                                    Margin="50,0,0,0"
+                                    FontSize="14"
+                                    Padding="0"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding enddate, StringFormat=Ngày kết thúc: {0}}"></TextBlock>
+
+                                    <Button Background="Silver" Foreground="Black" BorderBrush="Transparent" Margin="0,0,40,0" Width="150" Height="40" HorizontalAlignment="Right">Đăng ký</Button>
+
+                                </StackPanel>
+
+
+                            </Expander>
+                        </Grid>
+
+                    </DataTemplate>
+
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid>-->
     </Grid>
 </Page>

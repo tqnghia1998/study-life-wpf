@@ -55,7 +55,7 @@ namespace Client
                     new Dialog(Window.GetWindow(this), "Đăng nhập thành công").ShowDialog();
                     MainWindow.cookies = http.Cookies;
                     Clipboard.SetText(http.Cookies.ToString());
-                    NavigationService.Navigate(new Dashboard());
+                    NavigationService.Navigate(new StudentDashboard());
                 }
             }
             catch (Exception) {}

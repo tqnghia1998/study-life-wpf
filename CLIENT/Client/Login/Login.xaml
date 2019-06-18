@@ -76,7 +76,7 @@
                  Background="Transparent"
                  Margin="250,15,250,0"
                  BorderThickness="0,0,0,0.25"
-                 KeyDown="TextBox_KeyDown"/>
+                 KeyDown="TextBox_KeyDown" Text="1612431"/>
 
         <!--Password-->
         <Image Grid.Row="2"
@@ -98,7 +98,8 @@
                      Background="Transparent"
                      Margin="250,15,250,0"
                      BorderThickness="0,0,0,0.25"
-                     KeyDown="TextBox_KeyDown"/>
+                     KeyDown="TextBox_KeyDown" 
+                     Password="123"/>
 
         <!--Quên mật khẩu-->
         <TextBlock Grid.Row="2"
