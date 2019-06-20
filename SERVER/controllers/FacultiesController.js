@@ -39,5 +39,18 @@ module.exports = {
         else {
             res.json("Đã hết phiên hoạt động");
         }
+    },
+    getByUserId: function(req, res) {
+        if (req.isAuthenticated()) {
+            let userid = req.params.userid;
+            let sqlCom = "SELECT facultyname FROM users LEFT JOIN faculties ON users.faculty = faculties.facultyid WHERE users.userid = ?";
+            db.query(sqlCom, [userid], function(err, response){
+                if (err) res.status(203);
+                res.send(err ? err : response[0].facultyname);
+            });
+        }
+        else {
+            res.json("Đã hết phiên hoạt động");
+        }
     }
 }

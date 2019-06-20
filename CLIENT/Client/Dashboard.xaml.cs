@@ -3,6 +3,7 @@ using Client.HomeWork;
 using Client.Statistic;
 using Client.Subject;
 using Client.Term;
+using Client.UserInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,7 +94,7 @@ namespace Client
             }
             else
             {
-                NavigationService.Navigate(new PageStatistic());
+                NavigationService.Navigate(new PageUserInfo());
             }
         }
     }

@@ -821,3 +821,5 @@ C:\Users\CPU12400-local\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom
 C:\Users\CPU12400-local\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.baml
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.g.cs
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.baml
+C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\UserInfo\PageUserInfo.baml
+C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\UserInfo\PageUserInfo.g.cs

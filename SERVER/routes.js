@@ -6,6 +6,7 @@ module.exports = function(app) {
     const subjectsCtrl = require("./controllers/SubjectsController");
     const schedulesCtrl = require("./controllers/SchedulesController");
     const registersCtrl = require("./controllers/RegistersController");
+    const usersCtrl = require("./controllers/UsersController");
 
 
     /* LOGIN CONTROLLER */
@@ -26,6 +27,8 @@ module.exports = function(app) {
     .post(facultiesCtrl.post);
     app.route("/faculties/:facultyid")
     .put(facultiesCtrl.update);
+    app.route("/faculties/:userid")
+    .get(facultiesCtrl.getByUserId);
 
     /* TERMS CONTROLLER */
     app.route("/terms")
@@ -55,4 +58,8 @@ module.exports = function(app) {
     .get(registersCtrl.getByUserId);
     app.route("/registers/:userid/:subjectid")
     .delete(registersCtrl.deregisterByUserId)
+
+    /* USERS CONTROLLER */
+    app.route("/users/:userid")
+    .put(usersCtrl.update);
 };
