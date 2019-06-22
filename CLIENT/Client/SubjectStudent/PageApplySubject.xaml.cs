@@ -28,12 +28,10 @@ namespace Client.SubjectStudent
         public PageApplySubject()
         {
             InitializeComponent();
-
             new Thread(() =>
             {
                 try
                 {
-                    // Lấy JSON các khoa về
                     HttpRequest http = new HttpRequest();
                     http.Cookies = MainWindow.cookies;
                     string httpResponseSubject = http.Get(MainWindow.domainURL + "/register").ToString();
@@ -96,22 +94,11 @@ namespace Client.SubjectStudent
                 string currenttermyear = (termyear.SelectedItem as CTerm).termyear;
                 string currenttermindex = (termindex.SelectedItem as CTerm).termindex;
                 // Lấy JSON các khoa về
-                HttpRequest http = new HttpRequest();
-                http.Cookies = MainWindow.cookies;
-                string httpResponseSubject = http.Get(MainWindow.domainURL + "/register/" + currenttermyear + "/" + currenttermindex).ToString();
-                if (httpResponseSubject.Equals("Đã hết phiên hoạt động"))
-                {
-                    new Dialog(Window.GetWindow(this), httpResponseSubject).ShowDialog();
-                }
-                else
-                {
-                    ObservableCollection<CRegister> subjects;
-                    // Parse thành các đối tượng task
-                    subjects = JsonConvert.DeserializeObject<ObservableCollection<CRegister>>(httpResponseSubject);
-
                     // Thêm vào Combobox
-                    spListSubject.ItemsSource = subjects;
-                }
+                spListSubject.ItemsSource = getUnRegisted(currenttermyear, currenttermindex);
+
+                typeList.SelectedIndex = 0;
+                
             }
             catch (Exception) { }
         }
@@ -127,25 +114,58 @@ namespace Client.SubjectStudent
             }
         }
 
+        #region
         private void Registsubject_Click(object sender, RoutedEventArgs e)
         {
-            // Tham số cần truyền
-            var request = new HttpRequest();
-            request.Cookies = MainWindow.cookies;
-            request.AddParam("subjectid", current.subjectid);
-            // Gửi dữ liệu lên server
-            HttpResponse addTermResult = request.Raw(HttpMethod.POST, MainWindow.domainURL + "/register");
+            if (canRegister())
+            {
+                // Tham số cần truyền
+                var request = new HttpRequest();
+                request.Cookies = MainWindow.cookies;
+                request.AddParam("subjectid", current.subjectid);
+                // Gửi dữ liệu lên server
+                HttpResponse addTermResult = request.Raw(HttpMethod.POST, MainWindow.domainURL + "/register");
 
-            new Dialog(Window.GetWindow(this), addTermResult.ToString()).ShowDialog();
-            if (addTermResult.StatusCode != xNet.HttpStatusCode.OK) return;
+                new Dialog(Window.GetWindow(this), addTermResult.ToString()).ShowDialog();
+                if (addTermResult.StatusCode != xNet.HttpStatusCode.OK) return;
+                TypeList_SelectionChanged(null, null);
+            }
         }
 
-        ObservableCollection<CRegister> getRegisted()
+        bool canRegister()
         {
             ObservableCollection<CRegister> registed;
             HttpRequest http = new HttpRequest();
             http.Cookies = MainWindow.cookies;
-            string httpResponseSubject = http.Get(MainWindow.domainURL + "/registed").ToString();
+            string httpResponseSubject = http.Get(MainWindow.domainURL + "/registers/" + MainWindow.user.userid).ToString();
+            if (httpResponseSubject.Equals("Đã hết phiên hoạt động"))
+            {
+                new Dialog(Window.GetWindow(this), httpResponseSubject).ShowDialog();
+                return false;
+            }
+            else
+            {
+                // Parse thành các đối tượng task
+                registed = JsonConvert.DeserializeObject<ObservableCollection<CRegister>>(httpResponseSubject);
+
+                foreach (var item in registed)
+                {
+                    if (item.day == current.day)
+                    {
+
+                    }
+                }
+
+                return true;
+            }
+        }
+        #endregion
+        ObservableCollection<CRegister> getRegisted(string currenttermyear, string currenttermindex)
+        {
+            ObservableCollection<CRegister> registed;
+            HttpRequest http = new HttpRequest();
+            http.Cookies = MainWindow.cookies;
+            string httpResponseSubject = http.Get(MainWindow.domainURL + "/registed/" + currenttermyear + "/" + currenttermindex).ToString();
             if (httpResponseSubject.Equals("Đã hết phiên hoạt động"))
             {
                 new Dialog(Window.GetWindow(this), httpResponseSubject).ShowDialog();
@@ -159,12 +179,12 @@ namespace Client.SubjectStudent
             }
         }
 
-        ObservableCollection<CRegister> getUnRegisted()
+        ObservableCollection<CRegister> getUnRegisted(string currenttermyear, string currenttermindex)
         {
             ObservableCollection<CRegister> unregisted;
             HttpRequest http = new HttpRequest();
             http.Cookies = MainWindow.cookies;
-            string httpResponseSubject = http.Get(MainWindow.domainURL + "/unregisted").ToString();
+            string httpResponseSubject = http.Get(MainWindow.domainURL + "/register/" + currenttermyear + "/" + currenttermindex).ToString();
             if (httpResponseSubject.Equals("Đã hết phiên hoạt động"))
             {
                 new Dialog(Window.GetWindow(this), httpResponseSubject).ShowDialog();
@@ -182,15 +202,18 @@ namespace Client.SubjectStudent
         {
             if (typeList.SelectedIndex == 0)
             {
-                spListRegisted.Visibility = Visibility.Visible;
-                spListSubject.Visibility = Visibility.Hidden;
+                spListRegisted.Visibility = Visibility.Hidden;
+                spListSubject.Visibility = Visibility.Visible;
                 Termindex_SelectionChanged(null, null);
             }
             else
             {
-                spListRegisted.Visibility = Visibility.Hidden;
-                spListSubject.Visibility = Visibility.Visible;
-                spListRegisted.ItemsSource = getRegisted();
+                spListRegisted.Visibility = Visibility.Visible;
+                spListSubject.Visibility = Visibility.Hidden;
+
+                string currenttermyear = (termyear.SelectedItem as CTerm).termyear;
+                string currenttermindex = (termindex.SelectedItem as CTerm).termindex;
+                spListRegisted.ItemsSource = getRegisted(currenttermyear, currenttermindex);
 
             }
         }
@@ -206,5 +229,20 @@ namespace Client.SubjectStudent
             (sender as ComboBox).Background = Brushes.Transparent;
         }
         #endregion
+
+        private void Deregistsubject_Click(object sender, RoutedEventArgs e)
+        {
+            // Tham số cần truyền
+            var request = new HttpRequest();
+            request.Cookies = MainWindow.cookies;
+            request.AddParam("subjectid", current.subjectid);
+            // Gửi dữ liệu lên server
+            HttpResponse addTermResult = request.Raw(HttpMethod.DELETE, MainWindow.domainURL + "/register");
+
+            new Dialog(Window.GetWindow(this), addTermResult.ToString()).ShowDialog();
+            if (addTermResult.StatusCode != xNet.HttpStatusCode.OK) return;
+
+            TypeList_SelectionChanged(null, null);
+        }
     }
 }

@@ -52,15 +52,6 @@ module.exports = function(app) {
     .put(schedulesCtrl.update)
     .delete(schedulesCtrl.delete);
 
-    /* PRODUCTS CONTROLLER */
-    app.route("/products")
-    .get(productsCtrl.get)
-    .post(productsCtrl.store)
-    app.route("/products/:productId")
-    .get(productsCtrl.detail)
-    .put(productsCtrl.update)
-    .delete(productsCtrl.delete);
-
     // TASKS CONTROLLER
     app.route("/tasks")
     .get(tasksCtrl.get)
@@ -68,15 +59,16 @@ module.exports = function(app) {
     app.route("/tasks/:taskid")
     .put(tasksCtrl.update)
     
-    // REGISTER CONTROLLER
+    // REGISTERS CONTROLLER
     app.route("/register")
     .get(registerCtrl.termyear)
     .post(registerCtrl.post)
+    .delete(registerCtrl.delete)
     app.route("/register/:termyear")
     .get(registerCtrl.termindex)
     app.route("/register/:termyear/:termindex")
-    .get(registerCtrl.subject)
-    app.route("/registed")
+    .get(registerCtrl.unregisted)
+    app.route("/registed/:termyear/:termindex")
     .get(registerCtrl.registed)
     /* REGISTERS CONTROLLER */
     app.route("/registers/:userid")

@@ -414,7 +414,7 @@
                                     VerticalAlignment="Center"
                                     Text="{Binding enddate, StringFormat=Ngày kết thúc: {0}}"></TextBlock>
 
-                                <Button Background="Silver" Foreground="Black" BorderBrush="Transparent" Margin="0,0,40,0" Width="150" Height="40" HorizontalAlignment="Right" Name="registsubject" Click="Registsubject_Click">Đăng ký</Button>
+                                <Button Background="Silver" Foreground="Black" BorderBrush="Transparent" Margin="0,0,40,0" Width="150" Height="40" HorizontalAlignment="Right" Name="deregistsubject" Click="Deregistsubject_Click">Huỷ đăng ký</Button>
 
                             </StackPanel>
 

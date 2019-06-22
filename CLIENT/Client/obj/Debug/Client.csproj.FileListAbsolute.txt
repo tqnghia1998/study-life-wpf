@@ -409,7 +409,6 @@ E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\MaterialDesignColor
 E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\MaterialDesignThemes.Wpf.pdb
 E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\MaterialDesignThemes.Wpf.xml
 E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
-E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Newtonsoft.Json.pdb
 E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Newtonsoft.Json.xml
 E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\System.Reactive.xml
 E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\System.Reactive.Core.xml
@@ -821,3 +820,16 @@ C:\Users\CPU12400-local\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom
 C:\Users\CPU12400-local\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.baml
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.g.cs
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.baml
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.Licensing.dll
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.SfRadialMenu.WPF.dll
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.SfSchedule.WPF.dll
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.SfShared.WPF.dll
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.Shared.WPF.dll
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.SfRadialMenu.WPF.xml
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.SfSchedule.WPF.xml
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.SfShared.WPF.xml
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\bin\Debug\Syncfusion.Shared.WPF.xml
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\obj\Debug\Statistic\PageStatistic.baml
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.g.cs
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\obj\Debug\Statistic\PageStatistic.g.cs
+E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.baml

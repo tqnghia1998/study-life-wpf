@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.Classes
 {
-<<<<<<< HEAD
-    public class CRegister : CSubject
-    {
-        public DateTime begindate { get; set; }
-        public DateTime enddate { get; set; }
-=======
+
     public class CRegister
     {
         public CRegister(string userid, string status, string subjectid, string subjectname, string credit, string teachername, string termindex, string termyear, string faculty, string day, string room, string starttime, string finishtime, string facultyname, DateTime begindate, DateTime enddate)
@@ -46,6 +41,7 @@ namespace Client.Classes
         public string day { get; set; }
         public string room { get; set; }
         public string starttime { get; set; }
+        
         public string finishtime { get; set; }
         public string facultyname { get; set; }
         public DateTime begindate { get; set; }
@@ -78,6 +74,5 @@ namespace Client.Classes
         {
             return enddate.DayOfWeek;
         }
->>>>>>> ef62e519b46107a8f5b8bd498d18fd8e1d1d0852
     }
 }
