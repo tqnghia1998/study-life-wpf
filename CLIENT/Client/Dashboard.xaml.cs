@@ -1,8 +1,10 @@
 ﻿using Client.Faculty;
 using Client.HomeWork;
+using Client.Numbers;
 using Client.Statistic;
 using Client.Subject;
 using Client.Term;
+using Client.UserInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;

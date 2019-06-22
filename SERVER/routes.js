@@ -8,6 +8,8 @@ module.exports = function(app) {
     const tasksCtrl = require("./controllers/TaskController");
     const registerCtrl = require("./controllers/RegisterController");
     const registersCtrl = require("./controllers/RegistersController");
+    const usersCtrl = require("./controllers/UsersController");
+    const statisticsCtrl = require("./controllers/StatisticsController");
 
 
     /* LOGIN CONTROLLER */
@@ -28,6 +30,8 @@ module.exports = function(app) {
     .post(facultiesCtrl.post);
     app.route("/faculties/:facultyid")
     .put(facultiesCtrl.update);
+    app.route("/faculties/:userid")
+    .get(facultiesCtrl.getByUserId);
 
     /* TERMS CONTROLLER */
     app.route("/terms")
@@ -74,5 +78,19 @@ module.exports = function(app) {
     app.route("/registers/:userid")
     .get(registersCtrl.getByUserId);
     app.route("/registers/:userid/:subjectid")
-    .delete(registersCtrl.deregisterByUserId)
+    .delete(registersCtrl.deregisterByUserId);
+    app.route("/registers/registered/:userid")
+    .get(registersCtrl.getSubjectRegistered);
+    app.route("/registers/notregistered/:userid")
+    .get(registersCtrl.getSubjectNotRegistered);
+
+    /* USERS CONTROLLER */
+    app.route("/users/:userid")
+    .put(usersCtrl.update);
+
+    /* STATISTICS CONTROLLER */
+    app.route("/statistics/subjectdensities")
+    .get(statisticsCtrl.getSubjectDensities);
+    app.route("/statistics/registernumbers/:facultyid")
+    .get(statisticsCtrl.getRegisterNumbers);
 };

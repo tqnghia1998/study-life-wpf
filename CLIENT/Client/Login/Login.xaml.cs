@@ -58,10 +58,14 @@ namespace Client
                     MainWindow.user = JsonConvert.DeserializeObject<CUser>(loginResult.ToString());
                     MainWindow.cookies = http.Cookies;
                     Clipboard.SetText(http.Cookies.ToString());
-                    NavigationService.Navigate(new StudentDashboard());
+                    if (MainWindow.user.userType.Equals("admin"))
+                    {
+                        NavigationService.Navigate(new Dashboard());
+                    }
+                    else NavigationService.Navigate(new StudentDashboard());
                 }
             }
-            catch (Exception) {}
+            catch (Exception) { }
         }
 
         /// <summary>

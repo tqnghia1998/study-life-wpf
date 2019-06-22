@@ -45,12 +45,36 @@ module.exports = {
             res.json("Đã hết phiên hoạt động");
         }
     },
+    getSubjectNotRegistered: function(req, res) {
+        if (true) {
+            const sqlQuery = "SELECT * FROM subjects WHERE subjectid NOT IN (SELECT subjectid FROM registers WHERE userid = ?)";
+            let userid = req.params.userid;
+            db.query(sqlQuery, userid, function(err, response){
+                res.send(err ? "Không thể kết nối đến dữ liệu" : response);
+            });
+        }
+        else {
+            res.json("Đã hết phiên hoạt động");
+        }
+    },
     
     termindex: function(req, res) {
         if (req.isAuthenticated()) {
             const sqlQuery = "SELECT distinct termindex FROM terms where termyear = ?";
             db.query(sqlQuery, [req.params.termyear], function(err, response){
-                console.log(response);
+                console.log(response);     
+                res.send(err ? "Không thể kết nối đến dữ liệu" : response);
+            });
+        }
+        else {
+            res.json("Đã hết phiên hoạt động");
+        }
+    },
+    getSubjectRegistered: function(req, res) {
+        if (true) {
+            const sqlQuery = "SELECT * FROM subjects WHERE subjectid IN (SELECT subjectid FROM registers WHERE userid = ?)";
+            let userid = req.params.userid;
+            db.query(sqlQuery, userid, function(err, response){
                 res.send(err ? "Không thể kết nối đến dữ liệu" : response);
             });
         }

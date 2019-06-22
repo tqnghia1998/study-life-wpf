@@ -121,7 +121,8 @@ namespace Client
                         ["firstname"] = editFirstname.Text,
                         ["lastname"] = editLastname.Text,
                         ["email"] = editEmail.Text,
-                        ["faculty"] = editFaculty.Tag.ToString()
+                        ["faculty"] = editFaculty.Tag.ToString(),
+                        ["userType"] = "student"
                     };
 
                     // Đăng ký

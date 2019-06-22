@@ -1,0 +1,236 @@
+﻿<Page x:Class="Client.UserInfo.PageUserInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageUserInfo">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Backward & Forward-->
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Command="{x:Static NavigationCommands.BrowseBack}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowLeft"
+                Height="20"
+                Width="20" />
+        </Button>
+        <Button
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderBrush="#303030"
+            VerticalAlignment="Top"
+            Height="25" Width="25"
+            Margin="28,0,0,0"
+            Command="{x:Static NavigationCommands.BrowseForward}"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+            <materialDesign:PackIcon
+                Kind="KeyboardArrowRight"
+                Height="20"
+                Width="20" />
+        </Button>
+
+        <!--Title-->
+        <Label Content="THÔNG TIN TÀI KHOẢN"
+               Grid.ColumnSpan="2"
+               FontSize="22"
+               Padding="0"
+               FontWeight="Bold"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Center"/>
+
+        <!--Username-->
+        <Image Grid.Row="1"
+               Source="../Images/User.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
+        <Label Grid.Row="1"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editUsername}">_TÀI KHOẢN</Label>
+        <TextBox Grid.Row="1"
+                 IsEnabled="False"
+                 Name="editUsername"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Password-->
+        <Image Grid.Row="2"
+               Source="../Images/Pass.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
+        <Label Grid.Row="2"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editPassword}">_MẬT KHẨU</Label>
+        <PasswordBox Grid.Row="2"
+                 IsEnabled="False"
+                 Name="editPassword"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+        <Label Grid.Row="3"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="50,0,0,0"
+               Content="XÁC NHẬN"/>
+        <PasswordBox Grid.Row="3"
+                 IsEnabled="False"
+                 Name="editPassword2"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Email-->
+        <Image Grid.Row="4"
+               Source="../Images/Email.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
+        <Label Grid.Row="4"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editEmail}">_EMAIL</Label>
+        <TextBox Grid.Row="4"
+                 IsEnabled="False"
+                 Name="editEmail"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Name-->
+        <Image Grid.Row="5"
+               Source="../Images/Firstname.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
+        <Label Grid.Row="5"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editFirstname}">_HỌ</Label>
+        <TextBox Grid.Row="5"
+                 IsEnabled="False"
+                 Name="editFirstname"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+        <Label Grid.Row="6"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="50,0,0,0"
+               Target="{Binding ElementName=editLastname}">_TÊN</Label>
+        <TextBox Grid.Row="6"
+                 IsEnabled="False"
+                 Name="editLastname"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Faculty-->
+        <Image Grid.Row="7"
+               Source="../Images/Faculty.png"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Width="30"
+               Height="30"
+               Margin="15,0,0,5"/>
+        <Label Grid.Row="7"
+               FontSize="18"
+               FontWeight="Bold"
+               VerticalAlignment="Bottom"
+               Margin="50,0,0,0"
+               Content="KHOA"/>
+        <TextBox Grid.Row="7"
+                 Name="editFaculty"
+                 IsEnabled="False"
+                 FontSize="17"
+                 Margin="165,0,30,5"
+                 Background="Transparent"
+                 BorderThickness="0,0,0,0.25"/>
+
+        <!--Avatar-->
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Grid.RowSpan="5"
+                Margin="30,30,30,30">
+            <Border.Effect>
+                <DropShadowEffect
+                    Direction="270"
+                    ShadowDepth="5"
+                    BlurRadius="20"/>
+            </Border.Effect>
+            <Image Source="../Images/Logo.png"/>
+        </Border>
+
+        <!--Button-->
+        <Button Grid.Row="6"
+                Grid.Column="1"
+                Name="btnAvatar"
+                FontSize="18"
+                Width="150"
+                Height="35"
+                IsEnabled="False"
+                VerticalAlignment="Bottom"
+                Content="Chọn ảnh"/>
+        <Button Grid.Row="7"
+                Tag="Sửa"
+                Grid.Column="1"
+                Name="btnSave"
+                FontSize="18"
+                Width="150"
+                Height="35"
+                Content="Sửa"
+                Click="BtnSave_Click"/>
+    </Grid>
+</Page>

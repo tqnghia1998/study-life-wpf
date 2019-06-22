@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/applysubject.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/managework.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/schedule.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("study.ico")]
 
 
