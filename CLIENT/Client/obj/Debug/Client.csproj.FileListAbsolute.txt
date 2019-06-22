@@ -823,3 +823,5 @@ C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom\Schedu
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Custom\ScheduleInfo.baml
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\UserInfo\PageUserInfo.baml
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\UserInfo\PageUserInfo.g.cs
+C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Numbers\PageNumbers.g.cs
+C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Numbers\PageNumbers.baml

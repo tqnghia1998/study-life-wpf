@@ -1,5 +1,6 @@
 ﻿using Client.Faculty;
 using Client.HomeWork;
+using Client.Numbers;
 using Client.Statistic;
 using Client.Subject;
 using Client.Term;
@@ -94,7 +95,7 @@ namespace Client
             }
             else
             {
-                NavigationService.Navigate(new PageUserInfo());
+                NavigationService.Navigate(new PageStatistic());
             }
         }
     }
