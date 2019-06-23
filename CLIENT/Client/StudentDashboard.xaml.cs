@@ -1,4 +1,5 @@
 ﻿using Client.HomeWork;
+using Client.Statistic;
 using Client.SubjectStudent;
 using System;
 using System.Collections.Generic;
@@ -87,8 +88,7 @@ namespace Client
             }
             else if (img.Tag.Equals("imgManageSchedule"))
             {
-                //MessageBox.Show("imgManageSchedule");
-                //NavigationService.Navigate(new PageTerm());
+                NavigationService.Navigate(new PageStatistic());
             }
             
         }

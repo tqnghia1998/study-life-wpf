@@ -58,7 +58,8 @@ namespace Client
                     MainWindow.user = JsonConvert.DeserializeObject<CUser>(loginResult.ToString());
                     MainWindow.cookies = http.Cookies;
                     Clipboard.SetText(http.Cookies.ToString());
-                    if (MainWindow.user.userType.Equals("admin"))
+
+                    if (MainWindow.user.userType != null && MainWindow.user.userType.Equals("admin"))
                     {
                         NavigationService.Navigate(new Dashboard());
                     }

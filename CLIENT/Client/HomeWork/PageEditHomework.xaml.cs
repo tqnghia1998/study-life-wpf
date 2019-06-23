@@ -27,6 +27,8 @@ namespace Client.HomeWork
     {
         CTask task;
         ObservableCollection<CSubject> subjects;
+        public delegate void RefreshPageTask();
+        public event RefreshPageTask Refresh = null;
         public PageEditHomework()
         {
             InitializeComponent();
@@ -133,6 +135,10 @@ namespace Client.HomeWork
             new Dialog(Window.GetWindow(this), updateTask.ToString()).ShowDialog();
             if (updateTask.StatusCode != xNet.HttpStatusCode.OK) return;
 
+            if (Refresh != null)
+            {
+                Refresh();
+            }
             // Gọi lại trang danh sách task
             NavigationService.GoBack();
         }

@@ -20,6 +20,7 @@ using xNet;
 
 namespace Client.HomeWork
 {
+
     /// <summary>
     /// Interaction logic for PageAddHomework.xaml
     /// </summary>
@@ -28,6 +29,9 @@ namespace Client.HomeWork
         // Danh sách khoa và danh sách tên khoa
         ObservableCollection<CTask> tasks;
         ObservableCollection<CSubject> subjects;
+        public delegate void RefreshPageTask();
+        public event RefreshPageTask Refresh = null;
+
         public PageAddHomework()
         {
             InitializeComponent();
@@ -109,6 +113,11 @@ namespace Client.HomeWork
 
             new Dialog(Window.GetWindow(this), addTermResult.ToString()).ShowDialog();
             if (addTermResult.StatusCode != xNet.HttpStatusCode.OK) return;
+
+            if (Refresh != null)
+            {
+                Refresh();
+            }
 
             NavigationService.GoBack();
 

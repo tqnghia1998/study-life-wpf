@@ -153,7 +153,7 @@
                 BorderBrush="Silver"
                 VerticalAlignment="Stretch" 
                 Height="Auto"
-                Name="addTask"
+                Name="AddTask"
                 Click="AddTask_Click">
                 Thêm bài tập
             </Button>

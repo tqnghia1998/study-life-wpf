@@ -47,9 +47,11 @@ module.exports = {
     },
     getSubjectNotRegistered: function(req, res) {
         if (true) {
-            const sqlQuery = "SELECT * FROM subjects WHERE subjectid NOT IN (SELECT subjectid FROM registers WHERE userid = ?)";
-            let userid = req.params.userid;
-            db.query(sqlQuery, userid, function(err, response){
+            const sqlQuery = "SELECT * FROM subjects WHERE subjectid NOT IN (SELECT subjectid FROM registers WHERE userid = ?) and termindex = ? and termyear = ?";
+            let userid = req.user.userid;
+            let termindex = req.params.termindex;
+            let termyear = req.params.termyear;
+            db.query(sqlQuery, [userid, termindex, termyear], function(err, response){
                 res.send(err ? "Không thể kết nối đến dữ liệu" : response);
             });
         }
@@ -73,7 +75,8 @@ module.exports = {
     getSubjectRegistered: function(req, res) {
         if (true) {
             const sqlQuery = "SELECT * FROM subjects WHERE subjectid IN (SELECT subjectid FROM registers WHERE userid = ?)";
-            let userid = req.params.userid;
+            let userid = req.user.userid;
+            
             db.query(sqlQuery, userid, function(err, response){
                 res.send(err ? "Không thể kết nối đến dữ liệu" : response);
             });

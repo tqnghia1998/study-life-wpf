@@ -35,7 +35,6 @@ module.exports = {
         if (req.isAuthenticated()) {
             let data = req.body;
             let taskid = req.params.taskid;
-            console.log(data);
             if (data.subjectid == '') data.subjectid = null;
 
             let sqlCom = "UPDATE tasks SET ? WHERE taskid = ? ";
@@ -52,12 +51,11 @@ module.exports = {
     },
     delete: function(req, res) {
         if (req.isAuthenticated()) {
-            let subjectid = req.params.subjectid;
-            let day = req.params.day;
-            let sqlCom = "DELETE FROM schedules WHERE subjectid = ? AND day = ?";
-            db.query(sqlCom, [subjectid, day], function(err, response){
+            let taskid = req.params.taskid;
+            let sqlCom = "DELETE FROM tasks WHERE taskid = ? AND userid = ?";
+            db.query(sqlCom, [taskid, req.user.userid], function(err, response){
                 if (err) res.status(203);
-                res.send(err ? "Đã xảy ra lỗi khi xóa lịch học" : "Xóa lịch học thành công");
+                res.send(err ? "Đã xảy ra lỗi khi xóa bài tập" : "Xóa bài tập thành công");
             });
         }
         else {

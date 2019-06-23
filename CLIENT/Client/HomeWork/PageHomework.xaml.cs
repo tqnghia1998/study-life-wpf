@@ -25,7 +25,6 @@ namespace Client.HomeWork
     /// </summary>
     public partial class PageHomework : Page
     {
-
         ObservableCollection<CTask> tasks;
         ObservableCollection<CSubject> subjects;
         public PageHomework()
@@ -75,6 +74,12 @@ namespace Client.HomeWork
         }
 
         CTask currentTask = new CTask();
+
+        /// <summary>
+        /// Lấy item khi nhấn nút chỉnh sửa hoặc xoá
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridCell_PreviewMouseLeftButtonDownProduct(object sender, MouseButtonEventArgs e)
         {
             DataGridCell myCell = sender as DataGridCell;
@@ -83,19 +88,18 @@ namespace Client.HomeWork
             currentTask = temp;
         }
 
-        private void ProgressSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
-        }
-
         private void EditTask_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PageEditHomework(currentTask));
+            PageEditHomework pageEditHomework = new PageEditHomework();
+            pageEditHomework.Refresh += refreshPage;
+            NavigationService.Navigate(pageEditHomework);
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PageAddHomework());
+            PageAddHomework pageAddHomework = new PageAddHomework();
+            pageAddHomework.Refresh += refreshPage;
+            NavigationService.Navigate(pageAddHomework);
         }
 
         private void SearchKey_TextChanged(object sender, TextChangedEventArgs e)
@@ -104,11 +108,21 @@ namespace Client.HomeWork
             for (int i = 0; i < taskSearch.Count; i++)
             {
                 if (!((taskSearch[i].taskid.Contains(searchKey.Text)
-                    || taskSearch[i].taskname.Contains(searchKey.Text))
-                    && taskSearch[i].subjectid == subjectidselected))
+                    || taskSearch[i].taskname.Contains(searchKey.Text))))
                 {
-                    taskSearch.RemoveAt(i);
-                    i--;
+                    if (subjectidselected != "")
+                    {
+                        taskSearch.RemoveAt(i);
+                        i--;
+                    }
+                    else
+                    {
+                        if (taskSearch[i].subjectid != subjectidselected)
+                        {
+                            taskSearch.RemoveAt(i);
+                            i--;
+                        }
+                    }
                 }
             }
 
@@ -143,71 +157,68 @@ namespace Client.HomeWork
             });
         }
 
-
+        #region Hiệu ứng Combobox
         private void Combobox_DropDownOpened(object sender, EventArgs e)
         {
             (sender as ComboBox).Background = Brushes.LightGray;
         }
 
-        /// <summary>
-        /// Hiệu ứng khi bỏ chọn Combobox
-        /// </summary>
         private void Combobox_DropDownClosed(object sender, EventArgs e)
         {
             (sender as ComboBox).Background = Brushes.Transparent;
         }
+        #endregion
 
-        //#region Cập nhật tiến độ trực tiếp - Chưa làm được
-        //ListBox listbox;
-        //private void ProgressSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        //{
-        //    foreach (var item in listbox.Items)
-        //    {
-        //        var container = listbox.ItemContainerGenerator.ContainerFromItem(item);
-        //        var children = AllChildren(container);
-        //        var name = "progressSlider";
-        //        var control = (Slider)children.First(c => c.Name == name);
-        //    }
-        //}
+        /// <summary>
+        /// Cập nhật tiến độ ngay trên View
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProgressSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Slider slider = sender as Slider;
+            var request = new HttpRequest();
+            request.Cookies = MainWindow.cookies;
+            request.AddParam("taskid", currentTask.taskid);
+            request.AddParam("progress", slider.Value);
 
-        //public List<Control> AllChildren(DependencyObject parent)
-        //{
-        //    var list = new List<Control> { };
-        //    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
-        //    {
-        //        var child = VisualTreeHelper.GetChild(parent, i);
-        //        if (child is Control)
-        //            list.Add(child as Control);
-        //        list.AddRange(AllChildren(child));
-        //    }
-        //    return list;
-        //}
+            HttpResponse updateTask = request.Raw(HttpMethod.PUT, MainWindow.domainURL + "/tasks/" + currentTask.taskid);
+            new Dialog(Window.GetWindow(this), updateTask.ToString()).ShowDialog();
+            if (updateTask.StatusCode != xNet.HttpStatusCode.OK) return;
+        }
 
-        //private void SpListTask_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
+        private void SortType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sortType.SelectedIndex == 0)
+            {
+                if(subjectname.SelectedIndex == 0) spListTask.ItemsSource = tasks.OrderBy(s => s.deadline).Reverse().ToList();
+                else
+                {
+                    var tempid = (subjectname.SelectedItem as CSubject).subjectid;
+                    spListTask.ItemsSource = tasks.Where(a => a.subjectid == tempid).OrderBy(s => s.deadline).Reverse().ToList();
+                }
+            } else
+            {
+                if (subjectname.SelectedIndex == 0) spListTask.ItemsSource = tasks.OrderBy(s => s.progress).Reverse().ToList();
+                else
+                {
+                    var tempid = (subjectname.SelectedItem as CSubject).subjectid;
+                    spListTask.ItemsSource = tasks.Where(a => a.subjectid == tempid).OrderBy(s => s.progress).Reverse().ToList();
+                }
+            }
+        }
 
-        //}
-        //#endregion
+        private void Deletetask_Click(object sender, RoutedEventArgs e)
+        {
+            var request = new HttpRequest();
+            request.Cookies = MainWindow.cookies;
+            request.AddParam("taskid", currentTask.taskid);
 
-        //CTask currentTask = new CTask();
-        //private void SpListTask_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    currentTask = ((System.Windows.FrameworkElement)e.OriginalSource).DataContext as CTask;
-        //}
+            HttpResponse updateTask = request.Raw(HttpMethod.DELETE, MainWindow.domainURL + "/tasks/" + currentTask.taskid);
+            new Dialog(Window.GetWindow(this), updateTask.ToString()).ShowDialog();
+            if (updateTask.StatusCode != xNet.HttpStatusCode.OK) return;
 
-        //private void EditTaskButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    NavigationService.Navigate(new PageEditHomework(currentTask));
-        //}
-
-        //private void AddTaskButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
-
-        //private void DeleteTaskButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
+            refreshPage();
+        }
     }
 }
