@@ -78,7 +78,7 @@ module.exports = {
 
                     // Kiểm tra số tín chỉ
                     if (resCredit[0].totalcredit > 22) {
-                        res.send("Số tín chỉ vượt quá quy định");
+                        res.send("Số tín chỉ không thể vượt quá 22");
                     } else {
                         const sqlCheckDuplicateTime = "select * "
                             + "from schedules sc join subjects s on sc.subjectid = s.subjectid, "
@@ -91,9 +91,12 @@ module.exports = {
 
                         db.query(sqlCheckDuplicateTime, [data.subjectid, data.userid], function (err, resDuplicate) {
 
-
                             if (resDuplicate.length > 0) {
-                                res.send("Lỗi đăng kí trùng lịch");
+                                var subjectDup = "";
+                                for (var i = 0; i < resDuplicate.length; i++) {
+                                    subjectDup += "\n+ " + resDuplicate[i].subjectname;
+                                }
+                                res.send("Lỗi đăng kí trùng lịch với môn:" + subjectDup);
                             } else {
                                 //Đăng kí
                                 let sqlComRegister = "INSERT INTO registers SET ?";

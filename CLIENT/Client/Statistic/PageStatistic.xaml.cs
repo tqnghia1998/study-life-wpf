@@ -55,6 +55,7 @@ namespace Client.Statistic
                 try
                 {
                     // Lấy JSON các lịch học về
+                    Thread.Sleep(666);
                     HttpRequest http = new HttpRequest();
                     http.Cookies = MainWindow.cookies;
                     string httpResponse = http.Get(MainWindow.domainURL + "/registers/" + MainWindow.user.userid).ToString();
@@ -166,6 +167,7 @@ namespace Client.Statistic
         {
             e.Cancel = true;
             var app = e.Appointment as ScheduleAppointment;
+            if (app == null) return;
             int index;
             if (app.Location == null) return;
             int.TryParse(app.Location, out index);

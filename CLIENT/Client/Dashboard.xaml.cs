@@ -95,7 +95,7 @@ namespace Client
             }
             else
             {
-                NavigationService.Navigate(new PageStatistic());
+                NavigationService.Navigate(new PageNumbers());
             }
         }
     }
