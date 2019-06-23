@@ -159,10 +159,12 @@
                     Maximum="100"
                     Grid.Column="0"
                     Name="progress"
+                    ValueChanged="Progress_ValueChanged"
                     Value="{Binding progress}"
                     Width="Auto"/>
 
                 <Label
+                    Name="progressValue"
             Grid.Column="1"
             FontFamily="Sitka Subheading"
             FontSize="20"
