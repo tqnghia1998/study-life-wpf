@@ -1,6 +1,7 @@
 ﻿using Client.HomeWork;
 using Client.Statistic;
 using Client.SubjectStudent;
+using Client.UserInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,10 @@ namespace Client
                 manageSubject.Effect = effect;
             else if (img.Tag.Equals("imgManageSchedule"))
                 manageSchedule.Effect = effect;
+            else
+            {
+                userInfo.Effect = effect;
+            }
         }
 
         /// <summary>
@@ -72,6 +77,10 @@ namespace Client
                 manageSubject.Effect = effect;
             else if (img.Tag.Equals("imgManageSchedule"))
                 manageSchedule.Effect = effect;
+            else
+            {
+                userInfo.Effect = effect;
+            }
         }
         #endregion
 
@@ -90,7 +99,10 @@ namespace Client
             {
                 NavigationService.Navigate(new PageStatistic());
             }
-            
+            else
+            {
+                NavigationService.Navigate(new PageUserInfo());
+            }
         }
     }
 }

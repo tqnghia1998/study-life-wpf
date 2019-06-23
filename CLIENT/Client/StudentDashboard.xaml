@@ -98,6 +98,24 @@
                Source="Images/Schedule.png"
                MouseUp="Image_MouseUp"
                MouseMove="img_MouseMove"
+               MouseLeave="img_MouseLeave">
+            </Image>
+        </Border>
+
+        <!--Thông tin tài khoản-->
+        <Border Name="userInfo" Grid.Row="1" Grid.Column="1" Margin="72,0,50,0">
+            <Border.Effect>
+                <DropShadowEffect
+                    Color="DarkGray"
+                    Direction="270"
+                    ShadowDepth="5"
+                    BlurRadius="20"/>
+            </Border.Effect>
+            <Image Grid.Row="0"
+               Tag="imgUserInfo"
+               Source="Images/Info.png"
+               MouseUp="Image_MouseUp"
+               MouseMove="img_MouseMove"
                MouseLeave="img_MouseLeave"
                    >
             </Image>

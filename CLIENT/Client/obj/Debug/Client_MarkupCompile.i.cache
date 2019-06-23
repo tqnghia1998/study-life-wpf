@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\obj\Debug\
+C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-E:\IT\HK_6\Project\PTTK\Final\PTTKPM\CLIENT\Client\App.xaml
+C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\App.xaml
 19-402423054
 
-341465754173
-1421244757075
+341811840598
+1421958964269
 Custom\Dialog.xaml;Custom\ScheduleInfo.xaml;Dashboard.xaml;Faculty\PageFaculty.xaml;HomeWork\PageAddHomework.xaml;HomeWork\PageEditHomework.xaml;HomeWork\PageHomework.xaml;Login\Login.xaml;Login\Register.xaml;MainWindow.xaml;Numbers\PageNumbers.xaml;Schedule\PageSchedule.xaml;Statistic\PageStatistic.xaml;StudentDashboard.xaml;SubjectStudent\PageApplySubject.xaml;Subject\PageDetailSubject.xaml;Subject\PageSubject.xaml;Term\PageTerm.xaml;UserInfo\PageUserInfo.xaml;
 
-False
+True
 
