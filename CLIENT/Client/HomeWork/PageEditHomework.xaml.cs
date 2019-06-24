@@ -147,5 +147,10 @@ namespace Client.HomeWork
         {
             NavigationService.GoBack();
         }
+
+        private void Progress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            progressValue.Content = progress.Value.ToString() + "%";
+        }
     }
 }

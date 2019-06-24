@@ -74,7 +74,7 @@ module.exports = {
     },
     getSubjectRegistered: function(req, res) {
         if (true) {
-            const sqlQuery = "SELECT * FROM subjects WHERE subjectid IN (SELECT subjectid FROM registers WHERE userid = ?)";
+            const sqlQuery = "SELECT * FROM subjects s join terms t on s.termindex = t.termindex and s.termyear = t.termyear WHERE subjectid IN (SELECT subjectid FROM registers WHERE userid = ?) and t.enddate > now()";
             let userid = req.user.userid;
             
             db.query(sqlQuery, userid, function(err, response){

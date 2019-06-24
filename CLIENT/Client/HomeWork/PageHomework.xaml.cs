@@ -90,7 +90,7 @@ namespace Client.HomeWork
 
         private void EditTask_Click(object sender, RoutedEventArgs e)
         {
-            PageEditHomework pageEditHomework = new PageEditHomework();
+            PageEditHomework pageEditHomework = new PageEditHomework(currentTask);
             pageEditHomework.Refresh += refreshPage;
             NavigationService.Navigate(pageEditHomework);
         }
