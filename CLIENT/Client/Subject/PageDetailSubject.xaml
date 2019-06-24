@@ -191,12 +191,12 @@
                   Name="checkMonday"/>
         <TextBox Grid.Row="3"
                  Grid.Column="3"
-                 Margin="15,0,15,0"
+                 Margin="15,0,15,6"
                  materialDesign:HintAssist.Hint="Phòng học"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
-                 VerticalAlignment="Top"
+                 VerticalAlignment="Center"
                  IsEnabled="{Binding ElementName=checkMonday, Path=IsChecked}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Name="editRoomMonday"/>
@@ -236,12 +236,12 @@
                   Name="checkTuesday"/>
         <TextBox Grid.Row="4"
                  Grid.Column="3"
-                 Margin="15,0,15,0"
+                 Margin="15,0,15,6"
                  materialDesign:HintAssist.Hint="Phòng học"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
-                 VerticalAlignment="Top"
+                 VerticalAlignment="Center"
                  IsEnabled="{Binding ElementName=checkTuesday, Path=IsChecked}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Name="editRoomTuesday"/>
@@ -281,12 +281,12 @@
                   Name="checkWednesday"/>
         <TextBox Grid.Row="5"
                  Grid.Column="3"
-                 Margin="15,0,15,0"
+                 Margin="15,0,15,6"
                  materialDesign:HintAssist.Hint="Phòng học"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
-                 VerticalAlignment="Top"
+                 VerticalAlignment="Center"
                  IsEnabled="{Binding ElementName=checkWednesday, Path=IsChecked}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Name="editRoomWednesday"/>
@@ -326,12 +326,12 @@
                   Name="checkThursday"/>
         <TextBox Grid.Row="6"
                  Grid.Column="3"
-                 Margin="15,0,15,0"
+                 Margin="15,0,15,6"
                  materialDesign:HintAssist.Hint="Phòng học"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
-                 VerticalAlignment="Top"
+                 VerticalAlignment="Center"
                  IsEnabled="{Binding ElementName=checkThursday, Path=IsChecked}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Name="editRoomThursday"/>
@@ -371,12 +371,12 @@
                   Name="checkFriday"/>
         <TextBox Grid.Row="7"
                  Grid.Column="3"
-                 Margin="15,0,15,0"
+                 Margin="15,0,15,6"
                  materialDesign:HintAssist.Hint="Phòng học"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
-                 VerticalAlignment="Top"
+                 VerticalAlignment="Center"
                  IsEnabled="{Binding ElementName=checkFriday, Path=IsChecked}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Name="editRoomFriday"/>
@@ -416,12 +416,12 @@
                   Name="checkSaturday"/>
         <TextBox Grid.Row="8"
                  Grid.Column="3"
-                 Margin="15,0,15,0"
+                 Margin="15,0,15,6"
                  materialDesign:HintAssist.Hint="Phòng học"
                  FontSize="16"
                  Background="Transparent"
                  FontWeight="Bold"
-                 VerticalAlignment="Top"
+                 VerticalAlignment="Center"
                  IsEnabled="{Binding ElementName=checkSaturday, Path=IsChecked}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Name="editRoomSaturday"/>

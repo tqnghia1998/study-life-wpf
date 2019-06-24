@@ -17,15 +17,15 @@ namespace Client
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Process proc = Process.GetCurrentProcess();
-            int count = Process.GetProcesses().Where(p =>
-                p.ProcessName == proc.ProcessName).Count();
-            if (count > 1)
-            {
-                MessageBox.Show("Ứng dụng đang chạy trong hệ thống.", "Thông báo");
-                Current.Shutdown();
-                return;
-            }
+            //Process proc = Process.GetCurrentProcess();
+            //int count = Process.GetProcesses().Where(p =>
+            //    p.ProcessName == proc.ProcessName).Count();
+            //if (count > 1)
+            //{
+            //    MessageBox.Show("Ứng dụng đang chạy trong hệ thống.", "Thông báo");
+            //    Current.Shutdown();
+            //    return;
+            //}
 
             base.OnStartup(e);
             MainWindow = new MainWindow();

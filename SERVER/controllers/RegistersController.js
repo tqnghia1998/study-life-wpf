@@ -73,11 +73,14 @@ module.exports = {
         }
     },
     getSubjectRegistered: function(req, res) {
-        if (true) {
-            const sqlQuery = "SELECT * FROM subjects s join terms t on s.termindex = t.termindex and s.termyear = t.termyear WHERE subjectid IN (SELECT subjectid FROM registers WHERE userid = ?) and t.enddate > now()";
+        if (req.isAuthenticated()) {
+            const sqlQuery = "SELECT * FROM subjects WHERE termindex = ? AND termyear = ? AND subjectid IN (SELECT subjectid FROM registers WHERE userid = ?)";
+            let termindex = req.user.termindex;
+            let termyear = req.user.termyear;
             let userid = req.user.userid;
             
-            db.query(sqlQuery, userid, function(err, response){
+            db.query(sqlQuery, [termindex, termyear, userid], function(err, response){
+                console.log(response);
                 res.send(err ? "Không thể kết nối đến dữ liệu" : response);
             });
         }

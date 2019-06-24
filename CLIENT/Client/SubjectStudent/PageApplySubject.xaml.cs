@@ -154,7 +154,7 @@ namespace Client.SubjectStudent
             request.Cookies = MainWindow.cookies;
             request.AddParam("subjectid", current.subjectid);
             // Gửi dữ liệu lên server
-            HttpResponse addRegisters = request.Raw(HttpMethod.POST, MainWindow.domainURL + "/register");
+            HttpResponse addRegisters = request.Raw(HttpMethod.POST, MainWindow.domainURL + "/register/" + currenttermyear + "/" + currenttermindex);
 
             new Dialog(Window.GetWindow(this), addRegisters.ToString()).ShowDialog();
             if (addRegisters.StatusCode != xNet.HttpStatusCode.OK) return;
@@ -169,7 +169,7 @@ namespace Client.SubjectStudent
         {
             HttpRequest http = new HttpRequest();
             http.Cookies = MainWindow.cookies;
-            string httpResponseSubject = http.Get(MainWindow.domainURL + "/registed/").ToString();
+            string httpResponseSubject = http.Get(MainWindow.domainURL + "/registed/" + currenttermyear + "/" + currenttermindex).ToString();
             if (httpResponseSubject.Equals("Đã hết phiên hoạt động"))
             {
                 new Dialog(Window.GetWindow(this), httpResponseSubject).ShowDialog();
@@ -197,7 +197,7 @@ namespace Client.SubjectStudent
                     }
 
                 }
-                
+                // MessageBox.Show(registed.Count.ToString());
                 return registed;
             }
 

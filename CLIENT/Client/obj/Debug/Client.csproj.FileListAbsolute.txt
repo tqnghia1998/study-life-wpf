@@ -314,7 +314,6 @@ C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\bin\Debug\System.Runtim
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\bin\Debug\System.ValueTuple.xml
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\bin\Debug\WPFTextBoxAutoComplete.pdb
-C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Client.csprojAssemblyReference.cache
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Client.exe.config
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Schedule\PageSchedule.baml
 C:\Users\TQNghia\OneDrive\Documents\PTTKPM\CLIENT\Client\obj\Debug\Statistic\PageStatistic.baml

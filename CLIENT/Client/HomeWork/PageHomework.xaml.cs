@@ -183,8 +183,9 @@ namespace Client.HomeWork
             request.AddParam("progress", slider.Value);
 
             HttpResponse updateTask = request.Raw(HttpMethod.PUT, MainWindow.domainURL + "/tasks/" + currentTask.taskid);
-            new Dialog(Window.GetWindow(this), updateTask.ToString()).ShowDialog();
+            // new Dialog(Window.GetWindow(this), updateTask.ToString()).ShowDialog();
             if (updateTask.StatusCode != xNet.HttpStatusCode.OK) return;
+            currentTask.progress = (int) slider.Value;
         }
 
         private void SortType_SelectionChanged(object sender, SelectionChangedEventArgs e)

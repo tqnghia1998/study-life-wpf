@@ -69,9 +69,11 @@ module.exports = {
         if (req.isAuthenticated()) {
             let data = req.body;
             data.userid = req.user.userid;
+            var termindex = req.params.termindex;
+            var termyear = req.params.termyear;
 
-            const sqlQuery = "SELECT (sum(s.credit) + s2.credit) as totalcredit FROM subjects s, subjects s2 WHERE s.subjectid IN (SELECT subjectid FROM registers WHERE userid = ?) and s2.subjectid = ? ";
-            db.query(sqlQuery, [data.userid, data.subjectid], function (err, resCredit) {
+            const sqlQuery = "SELECT (sum(s.credit) + s2.credit) as totalcredit FROM subjects s, subjects s2 WHERE s.subjectid IN (SELECT subjectid FROM registers WHERE userid = ?) AND s.termindex = ? AND s.termyear = ? and s2.subjectid = ? ";
+            db.query(sqlQuery, [data.userid, termindex, termyear, data.subjectid], function (err, resCredit) {
                 if (err) {
                     res.send("Đã xảy ra lỗi khi đăng ký môn");
                 } else {
@@ -80,21 +82,26 @@ module.exports = {
                     if (resCredit[0].totalcredit > 22) {
                         res.send("Số tín chỉ không thể vượt quá 22");
                     } else {
-                        const sqlCheckDuplicateTime = "select * "
-                            + "from schedules sc join subjects s on sc.subjectid = s.subjectid, "
-                            + "schedules sc2 "
-                            + "where sc2.subjectid = ? and sc.day = sc2.day "
-                            + "and ((sc.finishtime > sc2.starttime and sc.finishtime < sc2.finishtime) "
-                            + "or (sc.starttime > sc2.starttime and sc.starttime < sc2.finishtime) "
-                            + "or (sc.starttime <= sc2.starttime and sc.finishtime >= sc2.finishtime)) "
-                            + "and sc.subjectid in (SELECT subjectid FROM registers WHERE userid = ?) ";
+                        const sqlCheckDuplicateTime = "select *, s.subjectname as nghiatq "
+                        + "from schedules sc join subjects s on sc.subjectid = s.subjectid, "
+                        + "schedules sc2 join subjects s2 on sc2.subjectid = s2.subjectid "
+                        + "where sc2.subjectid = ? and sc.day = sc2.day "
+                        + "and ( "
+                        +    "(sc2.starttime > sc.starttime and sc2.starttime < sc.finishtime) "
+                        +    "or (sc2.finishtime > sc.starttime and sc2.finishtime < sc.finishtime) "
+                        +    "or (sc2.starttime <= sc.starttime and sc2.finishtime >= sc.finishtime) "
+                        + ") "
+                        + "and sc.subjectid in "
+                        + "(SELECT r.subjectid FROM registers r join subjects s on r.subjectid = s.subjectid join terms t on t.termindex = s.termindex and t.termyear = s.termyear WHERE userid = ?) "
+                        + "and s.termindex = s2.termindex and s.termyear = s2.termyear";
 
                         db.query(sqlCheckDuplicateTime, [data.subjectid, data.userid], function (err, resDuplicate) {
 
                             if (resDuplicate.length > 0) {
+                                console.log("TQNGHIA", resDuplicate)
                                 var subjectDup = "";
                                 for (var i = 0; i < resDuplicate.length; i++) {
-                                    subjectDup += "\n+ " + resDuplicate[i].subjectname;
+                                    subjectDup += "\n+ " + resDuplicate[i].nghiatq;
                                 }
                                 res.send("Lỗi đăng kí trùng lịch với môn:" + subjectDup);
                             } else {

@@ -42,7 +42,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="-3,18,8,18">Mã bài tập</Label>
+            VerticalAlignment="Center" Margin="-3,18,8,18">Mã bài tập:</Label>
 
         <Label
             Grid.Row="2"
@@ -50,7 +50,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="-8,18,8,18">Tên bài tập</Label>
+            VerticalAlignment="Center" Margin="-8,18,8,18">Tên bài tập:</Label>
 
         <Label
             Grid.Row="3"
@@ -58,7 +58,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="0,18,8,18">Môn học</Label>
+            VerticalAlignment="Center" Margin="0,18,8,18">Môn học:</Label>
 
         <Label
             Grid.Row="4"
@@ -66,7 +66,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="0,18,8,18">Hạn chót</Label>
+            VerticalAlignment="Center" Margin="0,18,8,18">Hạn chót:</Label>
 
         <Label
             Grid.Row="5"
@@ -74,7 +74,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top" Margin="0,20,8,0">Mô tả</Label>
+            VerticalAlignment="Top" Margin="0,20,8,0">Mô tả:</Label>
 
         <TextBox
             Grid.Column="1"
@@ -128,10 +128,10 @@
             Name="description"
             AcceptsReturn="True"
             TextWrapping="Wrap"
-            FontSize="20"
+            FontSize="18"
             materialDesign:HintAssist.IsFloating="False"
             FontFamily="Sitka Subheading"
-            VerticalScrollBarVisibility="Auto" Margin="10,0,10,6" />
+            VerticalScrollBarVisibility="Auto" Margin="10,15,10,6" />
 
         <Grid
             Grid.Column="1"

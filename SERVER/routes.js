@@ -67,8 +67,9 @@ module.exports = function(app) {
     // REGISTERS CONTROLLER
     app.route("/register")
     .get(registerCtrl.termyear)
+    .delete(registerCtrl.delete);
+    app.route("/register/:termindex/:termyear")
     .post(registerCtrl.post)
-    .delete(registerCtrl.delete)
     app.route("/register/:termyear")
     .get(registerCtrl.termindex)
     app.route("/register/:termyear/:termindex")
@@ -80,7 +81,7 @@ module.exports = function(app) {
     .get(registersCtrl.getByUserId);
     app.route("/registers/:userid/:subjectid")
     .delete(registersCtrl.deregisterByUserId);
-    app.route("/registed/")
+    app.route("/registed/:termyear/:termindex")
     .get(registersCtrl.getSubjectRegistered);
     app.route("/registers/notregistered/:termyear/:termindex")
     .get(registersCtrl.getSubjectNotRegistered);
