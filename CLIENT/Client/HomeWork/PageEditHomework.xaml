@@ -41,7 +41,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="0,18,18,18">Mã bài tập</Label>
+            VerticalAlignment="Center" Margin="0,18,18,18">Mã bài tập:</Label>
 
         <Label
             Grid.Row="2"
@@ -49,7 +49,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="0,18,18,18">Tên bài tập</Label>
+            VerticalAlignment="Center" Margin="0,18,18,18">Tên bài tập:</Label>
 
         <Label
             Grid.Row="3"
@@ -57,7 +57,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top" Margin="0,22,18,0">Môn học</Label>
+            VerticalAlignment="Top" Margin="0,22,18,0">Môn học:</Label>
 
         <Label
             Grid.Row="4"
@@ -65,7 +65,7 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center" Margin="0,24,18,12">Hạn chót</Label>
+            VerticalAlignment="Center" Margin="0,24,18,12">Hạn chót:</Label>
 
         <Label
             Grid.Row="5"
@@ -73,14 +73,14 @@
             FontSize="20"
             Padding="0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top" Margin="0,22,18,0">Mô tả</Label>
+            VerticalAlignment="Top" Margin="0,22,18,0">Mô tả:</Label>
 
         <Label
             Grid.Row="6"
             FontFamily="Sitka Subheading"
             FontSize="20"
             Padding="0"
-            HorizontalAlignment="Right" Margin="0,22,18,23">Tiến độ</Label>
+            HorizontalAlignment="Right" Margin="0,22,18,23">Tiến độ:</Label>
 
         <TextBox
             Grid.Column="1"
@@ -132,13 +132,13 @@
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
 
         <TextBox
-            Grid.Column="1"
+            Grid.Column="1" Padding="0"
             Grid.Row="5"
+            Margin="0,15,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
             AcceptsReturn="True"
             TextWrapping="Wrap"
-            Margin="0,5,0,0"
-            FontSize="20"
+            FontSize="18"
             Name="description"
             Text="{Binding description}"
             materialDesign:HintAssist.IsFloating="False"
